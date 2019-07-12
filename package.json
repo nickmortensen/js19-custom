@@ -1,0 +1,26 @@
+{
+  "name": "projects-wordpress-plugin",
+  "version": "0.0.1",
+  "description": "custom post types for the jones sign website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "jonessign"
+  ],
+  "author": "nick mortensen",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-print": "^5.0.2",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "node-sass": "^4.12.0"
+  },
+  "scripts": {
+    "build": "gulp start",
+    "watch": "gulp watch",
+    "sassify": "gulp sassStyles"
+  }
+}

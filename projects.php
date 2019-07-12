@@ -32,8 +32,11 @@
  */
 define( 'PROJECTS_ROOT', plugin_dir_path( __FILE__ ) );
 define( 'PROJECT_INCLUDES', PROJECTS_ROOT . 'includes' );
+
+// Additional fields are built on CMB2 - so include their init.php script here.
 require_once __DIR__ . '/includes/CMB2/init.php';
 require_once PROJECT_INCLUDES . '/project-partners-field-type.php';
+require_once PROJECT_INCLUDES . '/taxonomy-signtype-extra-fields-cmb2.php';
 
 // phpcs:disable Generic.ControlStructures.InlineControlStructure.NotAllowed
 // Exit if accessed directly.
@@ -52,9 +55,6 @@ foreach ( glob( plugin_dir_path( __FILE__ ) . 'includes/*.php' ) as $file ) {
 register_activation_hook( __FILE__, 'projects_rewrite_flush' );
 
 
-// Add capabilities.
-register_activation_hook( __FILE__, 'projects_add_capabilities' );
-register_deactivation_hook( __FILE__, 'projects_remove_capabilities' );
 
 
 /**

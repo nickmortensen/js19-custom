@@ -5,11 +5,11 @@
  * Description: Refactored Custom Project Posts and Fields Done in CMB2 to eventually Expose to the REST API.
  * Version:     0.0.1
  * Author URI:  https://nickmortensen.com
- * Text Domain: jonessignProjects
+ * Text Domain: jsCustom
  * Domain Path: /languages
  *
  * @author Nick Mortensen
- * @package jonessignProjects
+ * @package jsCustom
  * @license GPL-2.0+
  * @since 5.0.1
  * @link https://github.com/CMB2/CMB2
@@ -17,11 +17,8 @@
  *
  */
 
-//  Get the bootstrap! If using the plugin from wordpress.org, REMOVE THIS!
-if ( file_exists( dirname( __FILE__ ) . '/CMB2/init.php' ) ) {
-	require_once dirname( __FILE__ ) . '/CMB2/init.php';
-}
-add_action( 'cmb2_admin_init', 'register_projects_metabox' );
+
+add_action( 'cmb2_init', 'register_projects_metabox' );
 
 /**
  * Hook in and add a projects metabox. Can only happen on the 'cmb2_admin_init' or 'cmb2_init' hook.
@@ -33,7 +30,7 @@ function register_projects_metabox() {
 	$projects = new_cmb2_box(
 		array(
 			'id'                           => $prefix . 'metabox',
-			'title'                        => esc_html__( 'Project Profile Fields', 'projects' ),
+			'title'                        => esc_html__( 'Project Profile Fields', 'jsCustom' ),
 			'object_types'                 => array( 'project' ), // Post type
 			'cmb_styles'                   => true, // Disable cmb2 stylesheet.
 			'show_in_rest'                 => WP_REST_Server::ALLMETHODS, // WP_REST_Server::READABLE|WP_REST_Server::EDITABLE, // Determines which HTTP methods the box is visible in.
@@ -71,9 +68,9 @@ function register_projects_metabox() {
 			'id'           => 'projectJobStatus',
 			'type'         => 'radio_inline',
 			'options'      => array(
-				'complete' => __( 'Complete', 'project' ), // completion_year.
-				'ongoing'  => __( 'Ongoing', 'project' ),  // completion_expected.
-				'upcoming' => __( 'Upcoming', 'project' ), // year_started.
+				'complete' => __( 'Complete', 'jsCustom' ), // completion_year.
+				'ongoing'  => __( 'Ongoing', 'jsCustom' ),  // completion_expected.
+				'upcoming' => __( 'Upcoming', 'jsCustom' ), // year_started.
 			),
 			'default'      => 'complete',
 			'object_types' => array( 'project' ), // Only show on project post types.
