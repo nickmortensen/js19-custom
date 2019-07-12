@@ -244,7 +244,7 @@ class CMB2_Types {
 	 */
 	public function get_new_render_type( $fieldtype, $render_class_name = null, $args = array(), $additional = '' ) {
 		$render_class_name = $this->get_render_type_class( $fieldtype, $render_class_name );
-		$this->type = new $render_class_name( $this, $args, $additional );
+		$this->type        = new $render_class_name( $this, $args, $additional );
 
 		return $this->type;
 	}

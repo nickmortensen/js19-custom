@@ -23,7 +23,7 @@ Main Wrap
 		width: 500px;
 
 		&.cmb2-textarea-code {
-			font-family: $font-mono;
+			font-family: $primary-font;
 			line-height: 16px;
 		}
 	}
@@ -81,7 +81,7 @@ Main Wrap
 
 	input:focus,
 	textarea:focus {
-		background: $yellow;
+		background: $light-yellow;
 	}
 
 	input[type="radio"] {
@@ -96,8 +96,11 @@ Main Wrap
 
 	button,
 	.button-secondary {
-		background: $yellow;
+		background: $fuchsia;
+		color: $white;
 		white-space: nowrap;
+		letter-spacing: 1.5px;
+		font-family: $primary-font;
 	}
 
 	.mceLayout {
@@ -105,12 +108,11 @@ Main Wrap
 	}
 
 	.mceIframeContainer {
-		background: #fff;
+		background: $white;
 	}
 
 	.meta_mce {
 		width: 97%;
-
 		textarea {
 			width: 100%;
 		}
@@ -156,7 +158,7 @@ Main Wrap
 }
 
 .cmb2-metabox {
-	background: $bg_metabox;
+	background: $light-gray;
 	padding: .5vw;
 	border-radius: 15px;
 	box-shadow: 4px 4px 14px $gray;
@@ -182,7 +184,7 @@ Main Wrap
 
 .cmb-add-row {
 	margin: 1.8em 0 0;
-	background: $yellow;
+	border-right: 4px solif $fuchsia;
 }
 
 .cmb-nested .cmb-td,

@@ -13,13 +13,14 @@
  */
 
 * html .cmb2-element.ui-helper-clearfix {
-	height:1%;
+	height: 1%;
 }
 
 $weekend: #f4f4f4;
 $freshblue: #00a0d2;
 $freshdark: #32373c;
-$freshdarkblue: #0073aa;
+$freshdarkblue: #878a8b;
+$freshdarkblue: $blue;
 
 .cmb2-element.ui-datepicker, .cmb2-element .ui-datepicker {
 	padding: 0;
@@ -37,7 +38,7 @@ $freshdarkblue: #0073aa;
 
 	* {
 		padding: 0;
-		font-family: "Open Sans", sans-serif;
+		font-family: $primary-font, $secondary-font;
 		-webkit-border-radius: 0;
 		-moz-border-radius: 0;
 		border-radius: 0;
@@ -116,7 +117,7 @@ $freshdarkblue: #0073aa;
 
 	.ui-datepicker-prev:before,
 	.ui-datepicker-next:before {
-		font: normal 20px/34px 'dashicons';
+		font: normal 20px/34px $icons;
 		padding-left: 7px;
 		color: #fff;
 		speak: none;
@@ -228,7 +229,7 @@ $freshdarkblue: #0073aa;
 			padding: 0 .6em;
 			dt {
 				float: left;
-				clear:left;
+				clear: left;
 				padding: 0 0 0 5px;
 			}
 			dd {
@@ -239,7 +240,7 @@ $freshdarkblue: #0073aa;
 			}
 		}
 
-		+ .ui-datepicker-buttonpane {
+		+.ui-datepicker-buttonpane {
 			padding: .6em;
 			text-align: left;
 

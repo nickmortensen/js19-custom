@@ -12,11 +12,10 @@ Post Metaboxes
 }
 
 .cmb2-postbox, .cmb-type-group {
-
 	.cmb2-wrap {
 		margin: 0;
 
-		> .cmb-field-list > .cmb-row {
+		>.cmb-field-list>.cmb-row {
 			padding: 1.8em 0;
 		}
 
@@ -44,7 +43,7 @@ Post Metaboxes
 		min-width: 1px !important;
 	}
 
-	.cmb-repeatable-group > .cmb-row {
+	.cmb-repeatable-group>.cmb-row {
 		padding-bottom: 0;
 	}
 
@@ -64,7 +63,7 @@ Post Metaboxes
 		padding-bottom: 1.8em;
 	}
 
-	.cmb-th + .cmb-td {
+	.cmb-th+.cmb-td {
 		width: 80%;
 		float: right;
 	}
@@ -83,7 +82,7 @@ Post Metaboxes
 		padding-top: 1.8em;
 	}
 
-	.cmb2-metabox > .cmb-row {
+	.cmb2-metabox>.cmb-row {
 		&.table-layout, .cmb-row.table-layout {
 			.cmb-repeat-table .cmb-tbody {
 				display: table;

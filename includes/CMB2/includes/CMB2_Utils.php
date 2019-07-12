@@ -29,17 +29,17 @@ class CMB2_Utils {
 	protected static $url = '';
 
 	/**
-	 * Utility method that attempts to get an attachment's ID by it's url
+	 * Get an attachment's ID by url.
 	 *
 	 * @since  1.0.0
-	 * @param  string $img_url Attachment url
-	 * @return int|false            Attachment ID or false
+	 * @param  string $img_url Attachment url.
+	 * @return int|false       Attachment ID or false
 	 */
 	public static function image_id_from_url( $img_url ) {
 		$attachment_id = 0;
-		$dir = wp_upload_dir();
+		$dir           = wp_upload_dir();
 
-		// Is URL in uploads directory?
+		// Is URL within uploads directory?
 		if ( false === strpos( $img_url, $dir['baseurl'] . '/' ) ) {
 			return false;
 		}
@@ -85,7 +85,7 @@ class CMB2_Utils {
 	 * @global array $_wp_additional_image_sizes
 	 * @return array The image sizes
 	 */
-	static function get_available_image_sizes() {
+	public static function get_available_image_sizes() {
 		global $_wp_additional_image_sizes;
 
 		$default_image_sizes = array( 'thumbnail', 'medium', 'large' );
@@ -114,7 +114,7 @@ class CMB2_Utils {
 	 * Uses get_available_image_sizes() to get all available sizes.
 	 *
 	 * @since  2.2.4
-	 * @param  array|string $size Image size. Accepts an array of width and height (in that order)
+	 * @param  array|string $size Image size. Accepts an array of width and height (in that order).
 	 * @return false|string       Named image size e.g. 'thumbnail'
 	 */
 	public static function get_named_size( $size ) {
@@ -204,7 +204,7 @@ class CMB2_Utils {
 
 			try {
 				$date_time_zone_selected = new DateTimeZone( $tzstring );
-				$tz_offset = timezone_offset_get( $date_time_zone_selected, date_create() );
+				$tz_offset               = timezone_offset_get( $date_time_zone_selected, date_create() );
 			} catch ( Exception $e ) {
 				self::log_if_debug( __METHOD__, __LINE__, $e->getMessage() );
 			}
@@ -233,7 +233,7 @@ class CMB2_Utils {
 			$tzstring = '';
 		}
 
-		if ( empty( $tzstring ) ) { // Create a UTC+- zone if no timezone string exists
+		if ( empty( $tzstring ) ) { // Create a UTC+- zone if no timezone string exists.
 			if ( 0 == $current_offset ) {
 				$tzstring = 'UTC+0';
 			} elseif ( $current_offset < 0 ) {
@@ -250,8 +250,8 @@ class CMB2_Utils {
 	 * Returns a timestamp, first checking if value already is a timestamp.
 	 *
 	 * @since  2.0.0
-	 * @param  string|int $string Possible timestamp string
-	 * @return int   	            Time stamp
+	 * @param  string|int $string Possible timestamp string.
+	 * @return int                Timestamp.
 	 */
 	public static function make_valid_time_stamp( $string ) {
 		if ( ! $string ) {
@@ -267,8 +267,8 @@ class CMB2_Utils {
 	 * Determine if a value is a valid timestamp
 	 *
 	 * @since  2.0.0
-	 * @param  mixed $timestamp Value to check
-	 * @return boolean           Whether value is a valid timestamp
+	 * @param  mixed $timestamp Value to check.
+	 * @return boolean           Whether value is a valid timestamp.
 	 */
 	public static function is_valid_time_stamp( $timestamp ) {
 		return (string) (int) $timestamp === (string) $timestamp
@@ -280,8 +280,8 @@ class CMB2_Utils {
 	 * Checks if a value is 'empty'. Still accepts 0.
 	 *
 	 * @since  2.0.0
-	 * @param  mixed $value Value to check
-	 * @return bool         True or false
+	 * @param  mixed $value Value to check.
+	 * @return bool         True or false.
 	 */
 	public static function isempty( $value ) {
 		return null === $value || '' === $value || false === $value || array() === $value;
@@ -302,8 +302,8 @@ class CMB2_Utils {
 	 * Filters out empty values (not including 0).
 	 *
 	 * @since  2.2.2
-	 * @param  mixed $value Value to check
-	 * @return bool         True or false
+	 * @param  mixed $value Value to check.
+	 * @return bool         True or false.
 	 */
 	public static function filter_empty( $value ) {
 		return array_filter( $value, array( __CLASS__, 'notempty' ) );
@@ -564,9 +564,9 @@ class CMB2_Utils {
 			$excluded = in_array( $attr, (array) $attr_exclude, true );
 			$empty    = false === $val && 'value' !== $attr;
 			if ( ! $excluded && ! $empty ) {
-				// if data attribute, use single quote wraps, else double
-				$quotes = self::is_data_attribute( $attr, 'data-' ) ? "'" : '"';
-				$attributes .= sprintf( ' %1$s=%3$s%2$s%3$s', $attr, $val, $quotes );
+				// if data attribute, use single quote wraps, else double.
+				$quotes       = self::is_data_attribute( $attr, 'data-' ) ? "'" : '"';
+				$attributes  .= sprintf( ' %1$s = %3$s%2$s%3$s', $attr, $val, $quotes );
 			}
 		}
 		return $attributes;

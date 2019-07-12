@@ -42,7 +42,7 @@ function register_signtype_taxonomy_metabox() {
 		'name'       => 'Instance',
 		'desc'       => 'Scenario Wherein this type of sign is best.',
 		'default'    => '',
-		'id'         => 'signtypeUseCase',
+		'id'         => 'signtypeUseCases',
 		'type'       => 'textarea_small',
 		'repeatable' => true,
 		'attributes' => array(
