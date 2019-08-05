@@ -1,0 +1,12 @@
+body.login {
+    background: orange;
+}
+
+
+body.login div#login form#loginform {
+    border-radius: 10px;
+}
+
+body.login .custom-message {
+    font-size: 3rem;
+}
