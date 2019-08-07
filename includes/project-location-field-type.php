@@ -5,6 +5,7 @@
 //phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 function get_state_options( $value = false ) {
 	$states = array(
+		'NONE' => 'Select a State',
 		'AL' => 'Alabama',
 		'AK' => 'Alaska',
 		'AZ' => 'Arizona',
@@ -74,7 +75,7 @@ function render_address_field_callback( $field, $value, $object_id, $object_type
 		$value,
 		array(
 			'address-1' => '',
-			'address-2' => '',
+			// 'address-2' => '',
 			'city'      => '',
 			'state'     => '',
 			'zip'       => '',
@@ -85,7 +86,7 @@ function render_address_field_callback( $field, $value, $object_id, $object_type
 ?>
 
 	<div>
-		<label for="<?php echo $field_type->_id( '_address_1' ); ?>">Address 1</label>
+		<label for="<?php echo $field_type->_id( '_address_1' ); ?>">Address</label>
 		<?php
 		echo $field_type->input(
 			array(
@@ -93,24 +94,26 @@ function render_address_field_callback( $field, $value, $object_id, $object_type
 				'id'    => $field_type->_id( '_address_1' ),
 				'value' => $value['address-1'],
 				'desc'  => '',
+
 			)
 		);
 		?>
 	</div><!-- end div#address-1 -->
 
-	<div>
-		<label for="<?php echo $field_type->_id( '_address_2' ); ?>'">Address 2</label>
+	<!-- <div> -->
+		<!-- <label for="<?php echo $field_type->_id( '_address_2' ); ?>'">Address 2</label> -->
 		<?php
-		echo $field_type->input(
-			array(
-				'name'  => $field_type->_name( '[address-2]' ),
-				'id'    => $field_type->_id( '_address_2' ),
-				'value' => $value['address-2'],
-				'desc'  => '',
-			)
-		);
+		// echo $field_type->input(
+		// 	array(
+		// 		'name'  => $field_type->_name( '[address-2]' ),
+		// 		'id'    => $field_type->_id( '_address_2' ),
+		// 		'value' => $value['address-2'],
+		// 		'desc'  => '',
+		// 	)
+		// );
 		?>
-	</div><!-- end div#address-2 -->
+	<!-- </div> -->
+	<!-- end div#address-2 -->
 
 	<div class="alignleft">
 	<label for="<?php echo $field_type->_id( '_city' ); ?>'">City</label>
@@ -155,9 +158,9 @@ function render_address_field_callback( $field, $value, $object_id, $object_type
 		);
 		?>
 	</div><!-- end div#zip -->
-
+<br>
 	<div class="alignleft">
-		<label for="<?php echo $field_type->_id( '_latitude' ); ?>'">latitude</label>
+		<label for="<?php echo $field_type->_id( '_latitude' ); ?>'">Latitude</label>
 		<?php
 		echo $field_type->input(
 			array(
@@ -170,7 +173,7 @@ function render_address_field_callback( $field, $value, $object_id, $object_type
 		);
 		?>
 	</div><!-- end div#latitude -->
-	<div class="alignleft" style="background: red;">
+	<div class="alignleft">
 		<label for="<?php echo $field_type->_id( '_longitude' ); ?>'">Longitude</label>
 		<?php echo $field_type->input(
 			array(
@@ -185,8 +188,7 @@ function render_address_field_callback( $field, $value, $object_id, $object_type
 
 	<br class="clear">
 <?php
-	// echo $field_type->_desc( true );
-	echo "fuck that";
+	// echo 'using project-location-field-type.php';
 
 } // end def render_address_field_callback( $field, $value, $object_id, $object_type, $field_type )
 

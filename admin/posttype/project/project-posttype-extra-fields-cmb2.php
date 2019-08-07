@@ -18,6 +18,16 @@
  */
 
 /**
+ * Manually render a field column display.
+ *
+ * @param  array      $field_args Array of field arguments.
+ * @param  CMB2_Field $field      The field object.
+ */
+
+
+
+
+/**
  * Hook in and add a projects metabox. Can only happen on the 'cmb2_admin_init' or 'cmb2_init' hook.
  */
 function register_projects_metabox() {
@@ -26,6 +36,7 @@ function register_projects_metabox() {
 	// Define the metabox itself. Fields will show up as $projects->add_field.
 	$projects = new_cmb2_box(
 		array(
+			'context' => 'normal',
 			'id'                           => $prefix . 'metabox',
 			'title'                        => esc_html__( 'Project Profile Fields', 'jsCustom' ),
 			'object_types'                 => array( 'project' ), // Post type
@@ -36,6 +47,32 @@ function register_projects_metabox() {
 			'get_box_permissions_check_cb' => 'projects_limit_rest_view_to_logged_in_users',
 		)
 	);
+
+	/**
+	 * Project Location is a cluster of fields that are defined as a single field type of 'address'.
+	 * The field is defined in the ../includes/project-location-field-type.php file.
+	 *
+	 * @todo Get some formatting in there so it isn't so ugly - flexbox maybe? Plut the field names in the inputs with javascript?  Something to make the alignment not be so godawful.
+	 */
+	$projects->add_field(
+		array(
+			'name'         => 'Project Location',
+			'class' => 'nick-fieldtype',
+			'desc'         => 'Project Address',
+			'id'           => 'projectLocation',
+			'type'         => 'address',
+			'object_types' => array( 'project' ), // Only show on project post types.
+			'options'      => array(),
+			'before_row'   => '<span class="dashicons dashicons-location-alt"></span>', // callback.
+			// 'before'       => '<p>Testing <b>"before"</b> parameter</p>',
+			// 'before_field' => '<p>Testing <b>"before_field"</b> parameter</p>',
+			// 'after_field'  => '<p>Testing <b>"after_field"</b> parameter</p>',
+			// 'after'        => '<p>Testing <b>"after"</b> parameter</p>',
+			'after_row'    => '<hr style="color: goldenrod;">',
+		)
+	);
+
+
 	/**
 	 * Job Number: projectJobNumber: Small Text Field.
 	 * Project Job Number.
@@ -44,14 +81,16 @@ function register_projects_metabox() {
 		array(
 			'name'         => 'Job #',
 			'desc'         => 'Assigned Job Number',
-			'default'      => '000000',
+			'default'      => '',
 			'id'           => 'projectJobNumber',
 			'type'         => 'text_small',
 			'object_types' => array( 'project' ), // Only show on project post types.
-			'column'       => array(
-				'position' => 2,
-				'name'     => 'Job #',
-			),
+			// 'column'       => array(
+			// 	'position' => 2,
+			// 	'name'     => 'Job #',
+			// ),
+			'before_row'   => 'yourprefix_before_row_if_2', // callback.
+			'after_row'    => '<hr>',
 		)
 	);
 	/**
@@ -61,6 +100,7 @@ function register_projects_metabox() {
 	 */
 	$projects->add_field(
 		array(
+			'before_row'   => '<span class="dashicons dashicons-yes-alt"></span>',
 			'name'         => 'Status',
 			'id'           => 'projectJobStatus',
 			'type'         => 'radio_inline',
@@ -143,8 +183,8 @@ function register_projects_metabox() {
 	);
 
 	/**
-	 * Project Alternate Name: Text Field.
-	 * Did the project have an alternate name?
+	 * ID projectAltName: Returns string.
+	 * The alternative name for this project.
 	 */
 	$projects->add_field(
 		array(
@@ -158,7 +198,7 @@ function register_projects_metabox() {
 	);
 
 	/**
-	 * SVGLogo: file.
+	 * ID projectSVGLogo. Returns URL.
 	 * A client logo. Should be square and ideally SVG.
 	 */
 	$projects->add_field(
@@ -183,7 +223,8 @@ function register_projects_metabox() {
 		)
 	);
 	/**
-	 * Project Narrative: narrative
+	 * ID projectNarrative. Returns Text.
+	 * 1 or 2 paragraphs about the project.
 	 */
 	$projects->add_field(
 		array(
@@ -241,99 +282,8 @@ function register_projects_metabox() {
 			),
 		)
 	);
-	/**
-	 * ProjectLocation: City
-	 */
 
-	$projects->add_field(
-		array(
 
-			'name' => 'City',
-			'desc' => 'City',
-			'id'   => 'projectLocation_city',
-			'type' => 'text',
-		)
-	);
-
-	/**
-	 * Project Location - State
-	 */
-	$projects->add_field(
-		array(
-			'name'    => 'state',
-			'desc'    => 'choose the state',
-			'id'      => 'projectLocation_state',
-			'type'    => 'select',
-			'options' => array(
-				'AL' => 'Alabama',
-				'AK' => 'Alaska',
-				'AZ' => 'Arizona',
-				'AR' => 'Arkansas',
-				'CA' => 'California',
-				'CO' => 'Colorado',
-				'CT' => 'Connecticut',
-				'DE' => 'Delaware',
-				'DC' => 'District Of Columbia',
-				'FL' => 'Florida',
-				'GA' => 'Georgia',
-				'HI' => 'Hawaii',
-				'ID' => 'Idaho',
-				'IL' => 'Illinois',
-				'IN' => 'Indiana',
-				'IA' => 'Iowa',
-				'KS' => 'Kansas',
-				'KY' => 'Kentucky',
-				'LA' => 'Louisiana',
-				'ME' => 'Maine',
-				'MD' => 'Maryland',
-				'MA' => 'Massachusetts',
-				'MI' => 'Michigan',
-				'MN' => 'Minnesota',
-				'MS' => 'Mississippi',
-				'MO' => 'Missouri',
-				'MT' => 'Montana',
-				'NE' => 'Nebraska',
-				'NV' => 'Nevada',
-				'NH' => 'New Hampshire',
-				'NJ' => 'New Jersey',
-				'NM' => 'New Mexico',
-				'NY' => 'New York',
-				'NC' => 'North Carolina',
-				'ND' => 'North Dakota',
-				'OH' => 'Ohio',
-				'OK' => 'Oklahoma',
-				'OR' => 'Oregon',
-				'PA' => 'Pennsylvania',
-				'RI' => 'Rhode Island',
-				'SC' => 'South Carolina',
-				'SD' => 'South Dakota',
-				'TN' => 'Tennessee',
-				'TX' => 'Texas',
-				'UT' => 'Utah',
-				'VT' => 'Vermont',
-				'VA' => 'Virginia',
-				'WA' => 'Washington',
-				'WV' => 'West Virginia',
-				'WI' => 'Wisconsin',
-				'WY' => 'Wyoming',
-			),
-		),
-	);
-	/**
-	 * Project Location is a cluster of fields that are defined as a single field type of 'address'.
-	 *
-	 * @todo Get some formatting in there so it isn't so ugly - flexbox maybe? Plut the field names in the inputs with javascript?  Something to make the alignment not be so godawful.
-	 */
-	$projects->add_field(
-		array(
-			'name'         => 'Project Location',
-			'desc'         => 'Project Address',
-			'id'           => 'projectLocation',
-			'type'         => 'address',
-			'object_types' => array( 'project' ), // Only show on project post types.
-			'options'      => array(),
-		)
-	);
 
 	/**
 	 * Establish the types of project partners for the selection field options.
@@ -341,7 +291,7 @@ function register_projects_metabox() {
 	 * @param boolean $value
 	 * @return string $partner_options  HTML containing the options fields for the field labeled partner type.
 	 */
-	function get_partner_types( $value = false ) {
+	function output_partner_type_options( $value = false ) {
 		// Establish an associative array of the partner types. This isn't by any means finished. I cannot think of any more partner types offhand, however.
 		$partnertypes    = array(
 			'architect' => 'Architect',
@@ -393,7 +343,7 @@ function register_projects_metabox() {
 			'name'    => 'Partner Type',
 			'id'      => 'partnerType',
 			'type'    => 'select',
-			'options' => get_partner_types( 'partner-types' ), // Callback function written 50 lines above. Populates select options.
+			'options' => output_partner_type_options( 'partner-types' ), // Callback function written 50 lines above. Populates select options.
 		)
 	);
 	$projects->add_group_field(
@@ -409,7 +359,7 @@ function register_projects_metabox() {
 		$partners_group_field,
 		array(
 			'name'         => 'Partner Logo',
-			'id'           => 'partnerogo',
+			'id'           => 'partnerLogo',
 			'desc'         => 'Partner Logo',
 			'type'         => 'file',
 			'text'         => [ 'add_upload_file_text' => 'Add SVG' ],

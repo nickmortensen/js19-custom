@@ -17,9 +17,6 @@
  *
  */
 
-
-add_action( 'cmb2_init', 'register_projects_metabox' );
-
 /**
  * Hook in and add a projects metabox. Can only happen on the 'cmb2_admin_init' or 'cmb2_init' hook.
  */
@@ -39,6 +36,8 @@ function register_projects_metabox() {
 			'get_box_permissions_check_cb' => 'projects_limit_rest_view_to_logged_in_users',
 		)
 	);
+
+
 	/**
 	 * Job Number: projectJobNumber: Small Text Field.
 	 * Project Job Number.
@@ -152,8 +151,8 @@ function register_projects_metabox() {
 	$projects->add_field(
 		array(
 			'name'         => 'Alt. Name',
-			'desc'         => 'Alternate Project Name',
-			'default'      => 'Is there an alternate name or client for this project?',
+			'desc'         => 'Is there an alternate name or client for this project?',
+			'default'      => '',
 			'id'           => 'projectAltName',
 			'type'         => 'text',
 			'object_types' => array( 'project' ), // Only show on project post types.
@@ -195,7 +194,7 @@ function register_projects_metabox() {
 			'id'           => 'projectNarrative',
 			'type'         => 'textarea_code',
 			'object_types' => array( 'project' ), // Only show on project post types.
-			'options'      => array(),
+			'options'      => $states,
 		)
 	);
 
@@ -244,6 +243,7 @@ function register_projects_metabox() {
 			),
 		)
 	);
+
 	/**
 	 * Project Location is a cluster of fields that are defined as a single field type of 'address'.
 	 *
@@ -345,3 +345,4 @@ function register_projects_metabox() {
 
 } // End def function register_projects_metabox().
 
+add_action( 'cmb2_init', 'register_projects_metabox' );

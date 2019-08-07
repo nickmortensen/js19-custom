@@ -41,6 +41,7 @@ function js_custom_set_custom_edit_project_columns( $columns ) {
 	unset( $columns['tags'] );
 	unset( $columns['comments'] );
 	unset( $columns['date'] );
+	unset( $columns['title'] );
 	return $columns;
 }
 add_filter( 'manage_project_posts_columns', 'js_custom_set_custom_edit_project_columns' );
@@ -59,8 +60,10 @@ add_filter( 'manage_project_posts_columns', 'js_custom_set_custom_edit_project_c
 function js_custom_set_project_columns( $columns ) {
 	$columns  = array(
 		'cb'                 => '<input type="checkbox" />',
-		'title'              => __( 'Project Name' ),
-		'at_a_glance' => __( 'Project' ),
+		'thumbnail' => 'Image',
+		// 'project_title'              => __( 'Project Name' ),
+		// 'at_a_glance' => __( 'at a glance' ),
+		// 'raw_data' => __( 'raw' ),
 		'signtypes'         => __( 'Featured Signage' ),
 		// 'has_featured_image' => __( 'img' ),
 		// 'service-type'       => __( 'Services' ),
@@ -75,39 +78,38 @@ function js_custom_set_project_columns( $columns ) {
 add_filter( 'manage_project_posts_columns', 'js_custom_set_project_columns' );
 
 function js_custom_project_column( $column, $post_id ) {
-	$default = '';
-	$no_img = '<span class="dashicons dashicons-format-image negative" style="color:red;"></span>';
-	$featured_img = get_the_post_thumbnail( $post_id, array( 400, 250 ) );
-	$thumbnail_id = get_post_thumbnail_id( $post_id );
-	$thumbnail_src = '';
-	$project_name = get_the_title( $post_id );
+	$project = get_post( $post_id );
+	$name = $project->post_title;
+	// $edit_fields = '<span class="edit"><a href="https://jonessign.co/wp-admin/post.php?post=' . $post_id . '&action=edit">EditAGAIN</a></span>'
+	$default       = '';
+	// $no_img        = '<span class = "dashicons dashicons-format-image negative" style = "color: red;"></span>';
+	$featured_img  = get_the_post_thumbnail( $post_id, array( 400, 300 ) );
+	$thumbnail_id  = get_post_thumbnail_id( $post_id ) ? get_post_thumbnail_id( $post_id ) : 923;
+	$thumbnail_src = wp_get_attachment_image_src( $thumbnail_id, 'wpRigRelated', $icon = false );
+	$project_name  = get_the_title( $post_id );
+	$job_number    = get_post_meta( $post_id, 'projectJobNumber', true );
+	$job_name      = get_the_title( $post_id );
 	// I'd like to get the post thumbnail by url and then include it as a picture element with metadata underneath.
-/*
-$project_information = <<<PROJECT
-<figure>
-    <img src="$thumbnail_src"
-		 alt="$thumbnail_caption"
-		 data-post-identifier="$post_id"
-		 >
-    <figcaption>$post_id $project_name</figcaption>
-</figure>
 
-PROJECT;
-*/
-
-	$main_img = $featured_img ?? $no_img;
 	switch( $column ) {
+		case 'thumbnail':
+		$output = '<div><img src="' . $thumbnail_src[0] . '" width="100%" style="z-index:-10;" /><span style="display:block;font-size:1.1rem;color:white;padding:0.15rem 0.8rem;background:black;z-index:150;position:relative; top: -1.15rem;">' . $name . '</span></div>';
+		echo $output;
+		echo '<div style=""></div>';
+			break;
 		case 'project_post_id':
 			echo "<strong>{$post_id}</strong>";
 			break;
-
-		case 'at_a_glance':
-			echo "Thumbnail {$thumbnail_id}:<br> Project Name: {$project_name} ";
+		case 'signtypes':
+			$taxonomy  = 'signtype';
+			$sign_types = get_the_term_list( $post_id, $taxonomy, '', '<br> ', '' );
+			echo $sign_types ?? $default;
 			break;
 //signtypes
 		default:
 			break;
 	}
+
 }
 // function js_custom_custom_project_column( $column, $post_id ) {
 // 	$default  = '';
