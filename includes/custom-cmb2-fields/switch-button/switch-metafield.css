@@ -1,0 +1,62 @@
+/**
+ * Custom switch field using cmb2 css.
+
+ * @author Nick Mortensen
+ * @package js19-custom
+ * @license GPL-2.0+
+ * @since 5.0.1
+ * @link https://www.proy.info/how-to-create-cmb2-switch-field/
+ */
+ *:root {
+     --light: #fff;
+ }
+.cmb2-switch{
+    margin-right: 15px;
+    margin-bottom: 5px;
+    float: left;
+}
+.cmb2-switch label {
+    cursor: pointer;
+}
+.cmb2-switch input {
+    display: none;
+}
+.cmb2-enable,
+.cmb2-disable {
+    --bkg: #bfbfbf;
+    background: #F5F5F5;
+    color: #95999d;
+    border: 1px solid var( --bkg, #bfbfbf );
+    display: block;
+    float: left;
+}
+.cmb2-enable {
+    border-radius: 3px 0 0 3px;
+    border-right: 0 none;
+}
+.cmb2-disable {
+    border-left: 0 none;
+    border-radius: 0 3px 3px 0;
+}
+.cmb2-enable span, .cmb2-disable span {
+    line-height: 30px;
+    display: block;
+    font-weight: normal;
+    white-space: nowrap;
+    padding: 0 10px;
+}
+.cmb2-disable.selected {
+    --bkg: #bfbfbf;
+    background-color: var( --bkg, #bfbfbf );
+    background-image: none;
+    border-color: var( --bkg, #bfbfbf );
+    color: var( --light, #fff );
+}
+.cmb2-enable.selected {
+    --bkg: #0273b9;
+    background-color: var( --bkg, #005077 );
+    background-image: none;
+    border-color: var( --bkg, #005077 );
+    box-shadow: none;
+    color: var( --light, #fff );
+}

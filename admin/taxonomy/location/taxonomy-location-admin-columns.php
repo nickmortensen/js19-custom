@@ -39,15 +39,19 @@ locationGoogleCID
  */
 function js19_location_taxonomy_additional_admin_columns( $columns ) {
 	unset( $columns['description'] );
+	unset( $columns['slug']);
+
 	$checkbox                   = array_slice( $columns, 0, 1 );
 	$columns                    = array_slice( $columns, 1 );
 	$id['locationID']           = 'ID';
-	$id['locationPhone']        = 'Phone';
-	$id['locationImage']        = 'Image';
-	$id['locationURL']          = 'URL';
+	$id['locationPhone']        = '<span class="dashicons dashicons-id"></span>';
+	$id['name']                 = 'city';
+	// $id['locationImage']        = 'Image';
+	// $id['locationURL']          = 'URL';
 	$columns                    = array_merge( $checkbox, $id, $columns );
-	$columns['locationWithinFooter'] = 'Footer?';
+	$columns['locationWithinFooter'] = '<span title="additional information" style="transform: rotate(180deg);" class="dashicons dashicons-warning"></span>';
 	return $columns;
+	// pr($columns);
 }
 add_action( 'manage_edit-location_columns', 'js19_location_taxonomy_additional_admin_columns' );
 
@@ -68,13 +72,27 @@ function populate_location_custom_columns( $content, $column_name, $term_id ) {
 			break;
 		case 'locationPhone':
 			$content = get_term_meta( $term_id, 'locationPhone', true );
+			$website = get_term_meta( $term_id, 'locationURL', true ); // ? '<br>' . get_term_meta( $term_id, 'locationURL', true ) : 'No URL';
+			$base = 'http://jonessign.com';
+			if ( $website !== $base ) {
+				$content .= '<br><a href="' . $website . '">' . ucfirst( str_ireplace( array( 'http://Jones', '.com' ), '', $website ) ) . '</a>';
+			} else {
+				$content .= '<br><a href="https://jonessign.com">National</a>';
+			}
 			break;
 		case 'locationWithinFooter':
-			$content = get_term_meta( $term_id, 'locationWithinFooter', true ) ? '<span style="font-size: 1.25rem;" class="dashicons dashicons-yes-alt"></span>' : '<span style="font-size: 1.25rem;" class="dashicons dashicons-dismiss"></span>';
+			// show an icon depending on thether you should include this location within the footer.
+			$content = get_term_meta( $term_id, 'locationWithinFooter', true )
+			? '<span title="inslude within footer" style="color: forestgreen;" class="dashicons dashicons-yes-alt"></span>'
+			: '<span title="do NOT include in footer" style="color: darkorange;" class="dashicons dashicons-dismiss"></span>';
+			$content .= get_term_meta( $term_id, 'locationImage', true )
+						? '<span title="location has a photo" style="color:green;"class="dashicons dashicons-format-image"></span>'
+						: '<span title="location has a photo" style="color:lightgrey;"class="dashicons dashicons-format-image"></span>';
+
 			break;
-		case 'locationURL':
-			$content = get_term_meta( $term_id, 'locationURL', true ) ? get_term_meta( $term_id, 'locationURL', true ) : 'No URL';
-			break;
+		// case 'locationURL':
+		// 	$content = get_term_meta( $term_id, 'locationURL', true ) ? get_term_meta( $term_id, 'locationURL', true ) : 'No URL';
+		// 	break;
 		default:
 			break;
 	}

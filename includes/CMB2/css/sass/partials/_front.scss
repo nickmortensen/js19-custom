@@ -1,6 +1,4 @@
-.closed .inside {
-	display: none;
-}
+.closed .inside { display: none; }
 
 .cmb-repeatable-grouping {
 	position: relative;
@@ -12,7 +10,7 @@
 	}
 
 	h3 {
-		font-size: 14px;
+		font-size: 1.2rem;
 		padding: 8px 12px;
 		margin: 0;
 		line-height: 1.4;
@@ -22,13 +20,9 @@
 
 .cmb-repeatable-group {
 
-	&.repeatable .cmb-group-title {
-		padding-left: 2.2em;
-	}
+	&.repeatable .cmb-group-title { padding-left: 2.2em; }
 
-	&.non-repeatable .cmb-group-title {
-		padding-left: 12px;
-	}
+	&.non-repeatable .cmb-group-title { padding-left: 12px; }
 
 }
 

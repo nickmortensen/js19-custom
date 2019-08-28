@@ -13,56 +13,72 @@
  * @license GPL-2.0+
  * @since 5.0.1
  */
-function client_cpt_init() {
+// Register Custom Post Type
+function js19_position_custom_post_type_initialize() {
+
 	$labels = array(
-		'name'                  => _x( 'Clientele', 'Post type general name', 'js19-custom' ),
-		'singular_name'         => _x( 'Client', 'Post type singular name', 'js19-custom' ),
-		'menu_name'             => _x( 'Clientele', 'Admin Menu text', 'js19-custom' ),
-		'name_admin_bar'        => _x( 'Client', 'Add New on Toolbar', 'js19-custom' ),
-		'add_new'               => __( 'Add New Client', 'js19-custom' ),
-		'add_new_item'          => __( 'Add New Client', 'js19-custom' ),
-		'new_item'              => __( 'New Client', 'js19-custom' ),
-		'edit_item'             => __( 'Edit Client', 'js19-custom' ),
-		'view_item'             => __( 'View Client', 'js19-custom' ),
-		'all_items'             => __( 'All Clientele', 'js19-custom' ),
-		'search_items'          => __( 'Search Clientele', 'js19-custom' ),
-		'parent_item_colon'     => __( 'Parent Clientele:', 'js19-custom' ),
-		'not_found'             => __( 'No Clientele found.', 'js19-custom' ),
-		'not_found_in_trash'    => __( 'No Clientele found in Trash.', 'js19-custom' ),
-		'featured_image'        => _x( 'Client 16x9 Img', 'Overrides the “Featured Image” phrase for this post type. Added in 4.3', 'js19-custom' ),
-		'set_featured_image'    => _x( 'Set cover image', 'Overrides the “Set featured image” phrase for this post type. Added in 4.3', 'js19-custom' ),
-		'remove_featured_image' => _x( 'Remove cover image', 'Overrides the “Remove featured image” phrase for this post type. Added in 4.3', 'js19-custom' ),
-		'use_featured_image'    => _x( 'Use as cover image', 'Overrides the “Use as featured image” phrase for this post type. Added in 4.3', 'js19-custom' ),
-		'archives'              => _x( 'Client archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'js19-custom' ),
-		'insert_into_item'      => _x( 'Insert into Client', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'js19-custom' ),
-		'uploaded_to_this_item' => _x( 'Uploaded to this Client', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'js19-custom' ),
-		'filter_items_list'     => _x( 'Filter Clientele list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'js19-custom' ),
-		'items_list_navigation' => _x( 'Clientele list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'js19-custom' ),
-		'items_list'            => _x( 'Clientele list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'js19-custom' ),
+		'name'                  => _x( 'Positions', 'Post Type General Name', 'js19-custom' ),
+		'singular_name'         => _x( 'Position', 'Post Type Singular Name', 'js19-custom' ),
+		'menu_name'             => __( 'Position', 'js19-custom' ),
+		'name_admin_bar'        => __( 'Position', 'js19-custom' ),
+		'archives'              => __( 'Position Archives', 'js19-custom' ),
+		'attributes'            => __( 'Attributes', 'js19-custom' ),
+		'parent_item_colon'     => __( 'Parent Item:', 'js19-custom' ),
+		'all_items'             => __( 'All Positions', 'js19-custom' ),
+		'add_new_item'          => __( 'Add New Position', 'js19-custom' ),
+		'add_new'               => __( 'Add New', 'js19-custom' ),
+		'new_item'              => __( 'New Position', 'js19-custom' ),
+		'edit_item'             => __( 'Edit Position', 'js19-custom' ),
+		'update_item'           => __( 'Update Position', 'js19-custom' ),
+		'view_item'             => __( 'View Position', 'js19-custom' ),
+		'view_items'            => __( 'View Positions', 'js19-custom' ),
+		'search_items'          => __( 'Search Positions', 'js19-custom' ),
+		'not_found'             => __( 'Not found', 'js19-custom' ),
+		'not_found_in_trash'    => __( 'Not found in Trash', 'js19-custom' ),
+		'featured_image'        => __( 'Featured Image', 'js19-custom' ),
+		'set_featured_image'    => __( 'Set featured image', 'js19-custom' ),
+		'remove_featured_image' => __( 'Remove featured image', 'js19-custom' ),
+		'use_featured_image'    => __( 'Use as featured image', 'js19-custom' ),
+		'insert_into_item'      => __( 'Insert into item', 'js19-custom' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this Position', 'js19-custom' ),
+		'items_list'            => __( 'Positions list', 'js19-custom' ),
+		'items_list_navigation' => __( 'Positions list nav', 'js19-custom' ),
+		'filter_items_list'     => __( 'Filter Positions List', 'js19-custom' ),
 	);
-
+	$rewrite = array(
+		'slug'                  => 'position',
+		'with_front'            => true,
+		'pages'                 => true,
+		'feeds'                 => true,
+	);
 	$args = array(
-		'labels'             => $labels,
-		'description'        => __( 'Client Profiles', 'js19-custom' ),
-		'public'             => true,
-		'publicly_queryable' => true,
-		'show_ui'            => true,
-		'show_in_menu'       => true,
-		'query_var'          => true,
-		'rewrite'            => array( 'slug' => 'client' ),
-		'has_archive'        => true,
-		'hierarchical'       => false,
-		'show_in_rest'       => true,
-		'rest_base'          => 'client',
-		'menu_position'      => null,
-		'menu_icon'          => 'dashicons-buddicons-buddypress-logo',
-		'menu_position'      => 26,
-		'supports'           => array( 'thumbnail', 'title', 'author', 'excerpt' ),
-		'map_meta_cap'       => true,
+		'label'                 => __( 'Position', 'js19-custom' ),
+		'description'           => __( 'Open Staff Positions with Descriptions', 'js19-custom' ),
+		'labels'                => $labels,
+		'supports'              => array( 'thumbnail', 'title', 'excerpt' ),
+		'taxonomies'            => array( 'location' ),
+		'hierarchical'          => false,
+		'public'                => true,
+		'show_ui'               => true,
+		'show_in_menu'          => true,
+		'menu_position'         => 100,
+		'menu_icon'             => 'dashicons-id-alt',
+		'show_in_admin_bar'     => true,
+		'show_in_nav_menus'     => true,
+		'can_export'            => true,
+		'has_archive'           => true,
+		'exclude_from_search'   => false,
+		'publicly_queryable'    => true,
+		'rewrite'               => $rewrite,
+		'capability_type'       => 'page',
+		'show_in_rest'          => true,
+		'rest_base'             => 'position',
+		'rest_controller_class' => 'WP_REST_Client_Controller',
 	);
+	register_post_type( 'position', $args );
 
-	register_post_type( 'client', $args );
 }
-$action_to_hook_into = 'init'; // Action that Clientele_cpt_init() is hooked to.
-$function_to_add     = 'client_cpt_init';
-add_action( 'init', $function_to_add );
+/**
+ * Including the function to initialize custom post types within the JS19__ROOT . js19-custom.php file instead of here, but leave the function commented out in case I want to refactor.
+ */
+// add_action( 'init', 'js19_position_custom_post_type_initialize', 0 );

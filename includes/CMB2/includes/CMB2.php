@@ -80,14 +80,14 @@ class CMB2 extends CMB2_Base {
 		'show_on'          => array(), // Post IDs or page templates to display this metabox. overrides 'show_on_cb'.
 		'cmb_styles'       => true, // Include CMB2 stylesheet.
 		'enqueue_js'       => true, // Include CMB2 JS.
-		'fields'           => array(),
+		'fields'            => array(),
 
 		/*
 		 * Handles hooking CMB2 forms/metaboxes into the post/attachement/user/options-page screens
  		 * and handles hooking in and saving those fields.
 		 */
 		'hookup'           => true,
-		'save_fields'      => true, // Will not save during hookup if false.
+		'save_fields'       => true, // Will not save during hookup if false.
 		'closed'           => false, // Default metabox to being closed.
 		'taxonomies'       => array(),
 		'new_user_section' => 'add-new-user', // or 'add-existing-user'.

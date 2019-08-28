@@ -27,16 +27,22 @@ function cmb2_dir( $path = '' ) {
  * @param  string $class_name Name of the class being requested
  */
 function cmb2_autoload_classes( $class_name ) {
+	// exit if the #class_name doesn't start with 'CMB2'
 	if ( 0 !== strpos( $class_name, 'CMB2' ) ) {
 		return;
 	}
 
 	$path = 'includes';
-
+	/**
+	 * set $path to 'includes/types' if the class_name is 'CMB2_Type' or $class_name starts with 'CMB2_Type_'
+	 */
+	// 'CMB2_Type_' file within the includes directory what begins with the string
 	if ( 'CMB2_Type' === $class_name || 0 === strpos( $class_name, 'CMB2_Type_' ) ) {
 		$path .= '/types';
 	}
-
+	/**
+	 * if class_name starts with CMB2_REST_, then set the path to includes/rest-api
+	 */
 	if ( 'CMB2_REST' === $class_name || 0 === strpos( $class_name, 'CMB2_REST_' ) ) {
 		$path .= '/rest-api';
 	}

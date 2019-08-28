@@ -4,7 +4,7 @@
  *
  * @see get_post_type_labels() for label keys.
  */
-function js19_project_cpt_init() {
+function js19_project_custom_post_type_initialize() {
 	$labels = array(
 		'name'                  => _x( 'Projects', 'Post type general name', 'js19-custom' ),
 		'singular_name'         => _x( 'Project', 'Post type singular name', 'js19-custom' ),
@@ -55,7 +55,10 @@ function js19_project_cpt_init() {
 	register_post_type( 'project', $args );
 }
 
-
+/**
+ * Including the function to initialize custom post types within the JS19__ROOT . js19-custom.php file instead of here, but leave the function commented out in case I want to refactor.
+ */
+// add_action( 'init', 'js19_project_custom_post_type_initialize', 0 );
 
 // /**
 //  * Flush rewrite rules on activation.

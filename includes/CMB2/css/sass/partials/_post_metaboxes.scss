@@ -16,7 +16,7 @@ Post Metaboxes
 		margin: 0;
 
 		>.cmb-field-list>.cmb-row {
-			padding: 1.8em 0;
+			padding: .8em 0;
 		}
 
 		input[type=text] {
@@ -26,10 +26,13 @@ Post Metaboxes
 			}
 		}
 	}
-
+/* overall row that holds a field */
 	.cmb-row {
-		padding: 0 0 1.8em;
-		margin: 0 0 0.8em;
+        width: 100%;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
 
 		.cmbhandle {
 			right: -1em;
@@ -46,31 +49,58 @@ Post Metaboxes
 	.cmb-repeatable-group>.cmb-row {
 		padding-bottom: 0;
 	}
-
+    /* contains the label */
 	.cmb-th {
-		width: 18%;
-		padding: 0 2% 0 0;
-		// text-align: right;
+        flex-grow: 1;
+        min-width: 8vw;
+        float:right;
+        padding: 1vw;
+        height: 100%;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items:center;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        & label{
+            padding: .5vw;
+            text-align: center;
+            vertical-align: top;
+            -webkit-transform-origin-x: center;
+            -webkit-transform-origin-y: center;
+            transform: rotateZ(-90deg);
+            font-size: 0.9rem;
+            min-width: 100%;
+            color: lighten($dark-gray, 40%);
+            font-family: $primary-font;
+         }
 	}
-
+    /* contains the field and the description  is a flex item and a flex parent */
 	.cmb-td {
+        min-height: 180px;
+        flex-grow: 8;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: flex-start;
+        min-width: 40vw;
 		margin-bottom: 0;
 		padding: 0;
-		line-height: 1.3;
+        line-height: 1.3;
+        .cmb2-metabox-description {
+            align-self: flex-end;
+        }
+
 	}
 
 	.cmb-repeat-row .cmb-td {
 		padding-bottom: 1.8em;
 	}
 
-	.cmb-th+.cmb-td {
-		width: 80%;
-		float: right;
-	}
+	.cmb-th+.cmb-td {}
 
 	.cmb-row:not(:last-of-type),
 	.cmb-repeatable-group:not(:last-of-type) {
-		border-bottom: 1px solid $light-gray;
 
 		@media (max-width: $mobile-break) {
 			border-bottom: 0;
@@ -85,7 +115,7 @@ Post Metaboxes
 	.cmb2-metabox>.cmb-row {
 		&.table-layout, .cmb-row.table-layout {
 			.cmb-repeat-table .cmb-tbody {
-				display: table;
+				// display: table;
 				width: 100%;
 
 				input.regular-text {
@@ -93,11 +123,11 @@ Post Metaboxes
 				}
 
 				.cmb-row:not(.hidden):not(.empty-row) {
-					display: table-row;
+					// display: table-row;
 				}
 
 				.cmb-td {
-					display: table-cell;
+					// display: table-cell;
 					float: none;
 					width: 100%;
 				}

@@ -39,13 +39,9 @@ Sidebar Placement Adjustments
 
 	}
 
-	textarea {
-		max-width: 99%;
-	}
+	textarea { max-width: 99%; }
 
-	.cmb-repeatable-group {
-		border-bottom: 1px solid $light-gray;
-	}
+	.cmb-repeatable-group { border-bottom: 1px solid $light-gray; }
 
 	.cmb-type-group>.cmb-td>.cmb-repeatable-group {
 		border-bottom: 0;
@@ -56,17 +52,13 @@ Sidebar Placement Adjustments
 	.cmb-td,
 	.cmb-th+.cmb-td {
 		width: 100%;
-		display: block;
+		// display: block;
 		float: none;
 	}
 
-	.closed .inside {
-		display: none;
-	}
+	.closed .inside { display: none; }
 
-	.cmb-td .cmb-td {
-		padding-bottom: 1em;
-	}
+	.cmb-td .cmb-td { padding-bottom: .5em; }
 
 	.cmb-th {
 		@include fullth_side;

@@ -13,10 +13,11 @@ $font-size : 16px;
 
 // Colors
 $dark-gray : #515153;
-$primary-font: serif;
+$light-gray: lighten($dark-gray, 50%);
+$primary-font: sans-serif;
 $secondary-font:-apple-system, BlinkMacSystemFont, sans-serif;
 $icons: 'dashicons';
-$gray : #aaaaaa;
+$gray : #aaa;
 $light-gray : #e9e9e9;
 $blue : #0273b9;
 $light-yellow : #fffff8;

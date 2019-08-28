@@ -21,7 +21,21 @@ $freshblue: #00a0d2;
 $freshdark: #32373c;
 $freshdarkblue: #878a8b;
 $freshdarkblue: $blue;
-
+$dark-gray : #515153;
+$light-gray: lighten($dark-gray, 50%);
+$primary-font: sans-serif;
+$secondary-font:-apple-system, BlinkMacSystemFont, sans-serif;
+$icons: 'dashicons';
+$gray : #aaa;
+$light-gray : #e9e9e9;
+$blue : #0273b9;
+$light-yellow : #fffff8;
+$yellow: rgb(255, 204, 102);
+$bg_metabox: rgba(255, 204, 102, .3);
+$fuchsia: #eb1777;
+$white : #fff;
+$red : #f00;
+$dark-red : #a00;
 .cmb2-element.ui-datepicker, .cmb2-element .ui-datepicker {
 	padding: 0;
 	margin: 0;
@@ -127,18 +141,12 @@ $freshdarkblue: $blue;
 		height: 34px;
 	}
 
-	.ui-datepicker-prev:before {
-		content: '\f341';
-	}
+	.ui-datepicker-prev:before { content: '\f341'; }
 
-	.ui-datepicker-next:before {
-		content: '\f345';
-	}
+	.ui-datepicker-next:before { content: '\f345'; }
 
 	.ui-datepicker-prev-hover:before,
-	.ui-datepicker-next-hover:before {
-		opacity: 0.7;
-	}
+	.ui-datepicker-next-hover:before { opacity: 0.7; }
 
 	select.ui-datepicker-month,
 	select.ui-datepicker-year {
@@ -147,9 +155,7 @@ $freshdarkblue: $blue;
 		border-color: transparent;
 		box-shadow: none;
 		color: #fff;
-		option {
-			color: #333;
-		}
+		option { color: #333; }
 	}
 
 	thead {
@@ -160,9 +166,7 @@ $freshdarkblue: $blue;
 		}
 	}
 
-	th {
-		padding: 10px;
-	}
+	th { padding: 10px; }
 
 	td {
 		padding: 0;
@@ -203,9 +207,7 @@ $freshdarkblue: $blue;
 		color: #444;
 	}
 
-	td.ui-state-disabled .ui-state-default {
-		opacity: 0.5;
-	}
+    td.ui-state-disabled .ui-state-default { opacity: 0.5; }
 
 	/* Default Color Scheme */
 	.ui-widget-header,
@@ -213,9 +215,7 @@ $freshdarkblue: $blue;
 		background: $freshblue;
 	}
 
-	thead {
-		background: $freshdark;
-	}
+	thead { background: $freshdark; }
 
 	td .ui-state-hover, td .ui-state-active {
 		background: $freshdarkblue;
@@ -263,9 +263,7 @@ $freshdarkblue: $blue;
 			background: $freshblue;
 		}
 
-		thead {
-			background: $freshdark;
-		}
+		thead { background: $freshdark; }
 
 		td .ui-state-hover {
 			background: $freshdarkblue;
@@ -280,9 +278,7 @@ $freshdarkblue: $blue;
 			background: #52accc;
 		}
 
-		thead {
-			background: #4796b3;
-		}
+		thead { background: #4796b3; }
 
 		// td .ui-state-hover {
 		// 	background: #096484;

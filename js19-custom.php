@@ -52,19 +52,40 @@ define( 'JS19__ADMIN', JS19__ROOT . '/admin' ); // Admin only folder.
  * (Update path to use cmb2 or CMB2, depending on the name of the folder.
  * Case-sensitive is important on some systems.)
  */
-defined( 'JS19__INCLUDES' ) || define( 'JS19__INCLUDES', JS19__ROOT . 'includes' );
-defined( 'JS19__POSTTYPE' ) || define( 'JS19__POSTTYPE', JS19__ROOT . 'admin/posttype' );
-defined( 'JS19__STAFFER' ) || define( 'JS19__STAFFER', JS19__ROOT . 'admin/posttype/staffer' );
-defined( 'JS19__TAXONOMY' ) || define( 'JS19__TAXONOMY', JS19__ROOT . 'admin/taxonomy' );
+defined( 'JS19__INCLUDES' ) || define( 'JS19__INCLUDES', JS19__ROOT . 'includes' ); // General Includes file - not specific to public or admin.
+defined( 'JS19__CUSTOM_CMB2_FIELDS' ) || define( 'JS19__CUSTOM_CMB2_FIELDS', JS19__INCLUDES . '/custom-cmb2-fields' ); // General Includes file - not specific to public or admin.
+
+defined( 'JS19__POSTTYPE' ) || define( 'JS19__POSTTYPE', JS19__ROOT . 'admin/posttype' ); // Directory of custom post types.
+defined( 'JS19__TAXONOMY' ) || define( 'JS19__TAXONOMY', JS19__ROOT . 'admin/taxonomy' ); // Directory of custom taxonomies.
+
+defined( 'JS19__STAFF' ) || define( 'JS19__STAFF', JS19__POSTTYPE . '/staff' );
+defined( 'JS19__CLIENT' ) || define( 'JS19__CLIENT', JS19__POSTTYPE . '/client' );
+defined( 'JS19__PROJECT' ) || define( 'JS19__PROJECT', JS19__POSTTYPE . '/project' );
+defined( 'JS19__POSITION' ) || define( 'JS19__POSITION', JS19__POSTTYPE . '/position' );
+defined( 'JS19__QUOTE' ) || define( 'JS19__QUOTE', JS19__POSTTYPE . '/quote' );
+defined( 'JS19__BILLBOARD' ) || define( 'JS19__BILLBOARD', JS19__POSTTYPE . '/billboard' );
+
+defined( 'JS19__LOCATION' ) || define( 'JS19__LOCATION', JS19__TAXONOMY . '/location' );
+defined( 'JS19__SIGNTYPE' ) || define( 'JS19__SIGNTYPE', JS19__TAXONOMY . '/signtype' );
 
 
 /**
- * ANY PHP FILE WITHIN THE INCLUDES DIRECTORY!!
+ * Include Every '.php' File Within the 'Includes' Directory
  * As long as the following loop is displayed higher up than other files, we can use this loop and globs to require_once any php file in a directory.
  */
-foreach ( glob( plugin_dir_path( __FILE__ ) . 'includes/*.php' ) as $file ) {
-	require_once $file;
-}
+// foreach ( glob( plugin_dir_path( __FILE__ ) . 'includes/*.php' ) as $file ) {
+// 	require_once $file;
+// }
+/**
+ * Include the defined post types
+ */
+require_once JS19__CLIENT . '/define-client-posttype.php';
+require_once JS19__TAXONOMY . '/location/define-location-taxonomy.php';
+require_once JS19__POSTTYPE . '/project/define-project-posttype.php'; // Contains function js19_project_cpt_init().
+require_once JS19__STAFF . '/define-staff-posttype.php';  // Contains function js19_staff_cpt_init().
+require_once JS19__POSITION . '/define-position-posttype.php';  // Contains function js19_staff_cpt_init().
+require_once JS19__QUOTE . '/define-quote-posttype.php';  // Contains function js19_staff_cpt_init().
+require_once JS19__BILLBOARD . '/define-billboard-posttype.php';  // Contains function js19_staff_cpt_init().
 
 if ( is_admin() ) {
 	require_once plugin_dir_path( __FILE__ ) . 'admin/admin-menu.php'; // Uses submenu rather than top-level menu.
@@ -72,30 +93,60 @@ if ( is_admin() ) {
 	require_once plugin_dir_path( __FILE__ ) . 'admin/settings-register.php';
 	require_once plugin_dir_path( __FILE__ ) . 'admin/settings-callbacks.php';
 	require_once plugin_dir_path( __FILE__ ) . 'admin/settings-validate.php';
-	require_once JS19__INCLUDES . '/project-partners-field-type.php';
-	require_once JS19__POSTTYPE . '/project/project-posttype-custom-columns.php';
-	require_once JS19__POSTTYPE . '/project/project-posttype-extra-fields-cmb2.php';
-	// require_once JS19__POSTTYPE . '/project/experimental-project-posttype-extra-fields-cmb2.php';
-	require_once JS19__TAXONOMY . '/signtype/define-signtype-taxonomy.php';
-	require_once JS19__TAXONOMY . '/signtype/taxonomy-signtype-extra-fields-cmb2.php';
-	require_once JS19__TAXONOMY . '/location/taxonomy-location-extra-fields-cmb2.php';
-	require_once JS19__TAXONOMY . '/location/taxonomy-location-admin-columns.php';
-	require_once JS19__STAFFER . '/posttype-staff-admin-columns.php';
-	require_once JS19__STAFFER . '/posttype-staff-extra-fields-cmb2.php';
+	require_once JS19__PROJECT . '/partner/partner-field-type.php';
+	require_once JS19__PROJECT . '/project-posttype-custom-columns.php';
+	require_once JS19__PROJECT . '/project-posttype-extra-fields-cmb2.php';
+	require_once JS19__CLIENT . '/client-posttype-cmb2-custom-fields.php';
+	require_once JS19__QUOTE . '/posttype-quote-extra-fields-cmb2.php';
+	require_once JS19__SIGNTYPE . '/define-signtype-taxonomy.php';
+	require_once JS19__SIGNTYPE . '/taxonomy-signtype-extra-fields-cmb2.php';
+	require_once JS19__LOCATION . '/taxonomy-location-extra-fields-cmb2.php';
+	require_once JS19__LOCATION . '/taxonomy-location-admin-columns.php';
+	require_once JS19__STAFF . '/posttype-staff-admin-columns.php';
+	require_once JS19__STAFF . '/posttype-staff-extra-fields-cmb2.php';
+	require_once JS19__BILLBOARD . '/billboard-posttype-cmb2-custom-fields.php';
 }
 require_once plugin_dir_path( __FILE__ ) . 'includes/core-functions.php'; // Core functions for the js19 Custom plugin.
 
 
+/**
+ * CMB2 NON STANDARD FIELDS CREATED JUST FOR THIS SITE
+ */
+
+ // BILLBOARD FIELD.
+require_once JS19__CUSTOM_CMB2_FIELDS . '/billboard-field/billboard-metafield.php';
+
+// SWITCH FIELD
+// Add Switch field.
+require_once JS19__CUSTOM_CMB2_FIELDS . '/switch-button/switch-metafield.php';
+
+// COORDINATES FIELD
+require_once JS19__CUSTOM_CMB2_FIELDS . '/coordinates-field/coordinates-metafield.php';
+/**
+ * Load up the custom js and css for the Custom Switch Field in CMB2.
+ *
+ * @return void
+ */
+function load_switch_cmb2_script() {
+	wp_enqueue_style( 'cmb2_switch-css', plugins_url( 'js19-custom/includes/custom-cmb2-fields/switch-button/switch-metafield.css' ), false, '1.0.0' ); // CSS for switch field.
+
+}
+add_action( 'admin_enqueue_scripts', 'load_switch_cmb2_script', 20 );
 
 /**
- * Use a loop to define the additional post types.
+ * Create an array of the various custom post type initialization functions, then loop through that to initialize them here rather than in the definition files themselves.
  */
-require_once JS19__TAXONOMY . '/location/define-location-taxonomy.php';
-require_once JS19__POSTTYPE . '/project/define-project-posttype.php'; // Contains function js19_project_cpt_init().
-require_once JS19__STAFFER . '/define-staff-posttype.php';  // Contains function js19_staff_cpt_init().
-$js19_post_type_functions = [ 'js19_staff_cpt_init', 'js19_project_cpt_init', 'js19_custom_location_taxonomy' ];
+$js19_post_type_functions = [
+	'js19_client_custom_post_type_initialize', // Initialize client custom post type.
+	'js19_staff_custom_post_type_initialize', // Initialize staff custom post type.
+	'js19_project_custom_post_type_initialize', // Initialize project custom post type.
+	'js19_position_custom_post_type_initialize', // Initialize position custom post type for job openings.
+	'js19_custom_location_taxonomy_initialize', // Initialize 'location' custom taxonomy.
+	'js19_quote_custom_post_type_initialize', // Initialize the quote custom post type.
+	'js19_billboard_custom_post_type_initialize', // Initialize the billboard custom post type.
+];
 foreach ( $js19_post_type_functions as $posttype ) {
-	add_action( 'init', $posttype );
+	add_action( 'init', $posttype, 0 );
 }
 /**
  * Register Task post type.
@@ -107,7 +158,7 @@ register_activation_hook( __FILE__, 'projects_rewrite_flush' );
 function remove_unwanted_menu() {
 	$remove_these_pages = [ 'edit-comments', 'tools', 'users' ];
 	foreach ( $remove_these_pages as $pagename ) {
-		remove_menu_page( $page . '.php' );
+		remove_menu_page( $pagename . '.php' );
 	}
 	// remove_menu_page( 'edit-comments.php' );
 	// remove_menu_page( 'users.php' );
@@ -129,6 +180,7 @@ function projects_admin_scripts_load( $hook ) {
 	}
 	wp_enqueue_script( 'projects-javascript', plugins_url( 'js19-custom/includes/js/custom_fields.js' ), array(), '20190614', true );
 	wp_enqueue_script( 'projects-conditional-fields-js', plugins_url( 'js19-custom/includes/js/conditional_fields.js' ), array(), '20190614', true );
+	wp_enqueue_script( 'cmb2_switch-js', plugins_url( 'js19-custom/includes/custom-cmb2-fields/switch-button/switch-metafield.js' ), '', '1.0.0', true ); // JS for switch field.
 }
 
 add_action( 'admin_enqueue_scripts', 'projects_admin_scripts_load' );

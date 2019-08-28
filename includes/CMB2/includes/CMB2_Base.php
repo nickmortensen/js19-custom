@@ -340,13 +340,13 @@ abstract class CMB2_Base {
 	 *
 	 * @param  string $hook_name     The hook name.
 	 * @param  bool   $val           The default value.
-	 * @param  string $hook_function The hook function. Default: 'add_filter'
+	 * @param  string $hook_function The hook function. Default: 'add_filter'.
 	 *
 	 * @return null|bool             Null if hook is registered, or bool for value.
 	 */
 	public function maybe_hook_parameter( $hook_name, $val = null, $hook_function = 'add_filter' ) {
 
-		// Remove filter prefix, add param suffix.
+		// Remove filter prefix, add param suffix. 9 is the second param.
 		$parameter = substr( $hook_name, strlen( 'cmb2_api_' ) ) . '_cb';
 
 		return self::maybe_hook(

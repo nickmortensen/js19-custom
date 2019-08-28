@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Projects
  * Plugin URI:  https://linkedin.com/learning
- * Description: Refactored Custom Project Posts and Fields Done in CMB2 to eventually Expose to the REST API.
+ * desc: Refactored Custom Project Posts and Fields Done in CMB2 to eventually Expose to the REST API.
  * Version:     0.0.1
  * Author URI:  https://nickmortensen.com
  * Text Domain: jsCustom
@@ -14,7 +14,6 @@
  * @since 5.0.1
  * @link https://github.com/CMB2/CMB2
  * @note This iteration of the plugin uses CMB2.
- *
  */
 
 /**
@@ -23,6 +22,18 @@
  * @param  array      $field_args Array of field arguments.
  * @param  CMB2_Field $field      The field object.
  */
+
+/**
+ * Experimental label callback. Generic for the moment, I am just experimenting.
+ *
+ * @param array $field_args
+ * @return void
+ */
+function use_label_callback( $field_args ) {
+	$label = $field_args['name'];
+	echo '<style> h3{ color: salmon;}</style>';
+	echo '<h3>' . esc_html( $label ) . '</h3>';
+}
 
 
 
@@ -36,11 +47,13 @@ function register_projects_metabox() {
 	// Define the metabox itself. Fields will show up as $projects->add_field.
 	$projects = new_cmb2_box(
 		array(
-			'context' => 'normal',
+			'context'                      => 'normal',
+			'classes'                      => 'project-profile-metabox',
+			'show_names'                   => true,
 			'id'                           => $prefix . 'metabox',
-			'title'                        => esc_html__( 'Project Profile Fields', 'jsCustom' ),
-			'object_types'                 => array( 'project' ), // Post type
-			'cmb_styles'                   => true, // Disable cmb2 stylesheet.
+			'title'                        => esc_html__( 'Project Overview', 'js19' ),
+			'object_types'                 => array( 'project' ), // Post type. This metabox will only show up on project post type pages. Could be 'page', 'user', 'term', 'comment', or 'options page as well'.
+			'cmb_styles'                   => true, // Disable cmb2 stylesheet by setting to false.
 			'show_in_rest'                 => WP_REST_Server::ALLMETHODS, // WP_REST_Server::READABLE|WP_REST_Server::EDITABLE, // Determines which HTTP methods the box is visible in.
 			// Optional callback to limit box visibility.
 			// See: https://github.com/CMB2/CMB2/wiki/REST-API#permissions
@@ -48,30 +61,114 @@ function register_projects_metabox() {
 		)
 	);
 
+	// $partners_field_identifier = $projects->add_field(
+	// 	array(
+	// 		'id'      => 'projectPartnerGroupExperiment',
+	// 		'type'    => 'group',
+	// 		'desc'    => __( 'Partners', 'js19-custom' ),
+	// 		'options' => array(
+	// 			'group_title'    => __( 'Partner{#}', 'js19-custom' ),
+	// 			'add_button'     => __( 'Add Additional Partner', 'js19-custom' ),
+	// 			'remove_button'  => __( 'Remove Additional Partner', 'js19-custom' ),
+	// 			'sortable'       => true,
+	// 			'remove_confirm' => esc_html__( 'You Sure?', 'js19-custom' ),
+	// 			'closed'         => true,
+	// 		),
+	// 	)
+	// );
+
+	// $types_of_partners   = array(
+	// 	'architect' => 'Architect',
+	// 	'gc'        => 'General Contractor',
+	// 	'designer'  => 'SEGD Firm',
+	// );
+	// $projects->add_field(
+	// 	// $partners_field_identifier,
+	// 	array(
+	// 		'name'             => 'type',
+	// 		'id'               => 'projectPartnerType',
+	// 		'type'             => 'select',
+	// 		'desc'             => '',
+	// 		'show_option_none' => true,
+	// 		// 'default'       => 'custom',
+	// 		'options'          => $types_of_partners,
+	// 	)
+	// );
+	// $projects->add_field(
+	// 	// $partners_field_identifier,
+	// 	array(
+	// 		'name' => 'name',
+	// 		'id'   => 'projectPartnerName',
+	// 		'type' => 'text',
+	// 		'desc' => '',
+	// 	)
+	// );
+	// $projects->add_field(
+	// 	// $partners_field_identifier,
+	// 	array(
+	// 		'name' => 'link',
+	// 		'id'   => 'projectPartnerLink',
+	// 		'type' => 'text_url',
+	// 		'desc' => 'link to the partner homepage',
+	// 	)
+	// );
+	// $projects->add_field(
+	// 	// $partners_field_identifier,
+	// 	array(
+	// 		'name' => 'logo',
+	// 		'id'   => 'projectPartnerLogo',
+	// 		'type' => 'file',
+	// 		'desc' => 'company logo',
+	// 	)
+	// );
+
+	// $projects->add_field(
+	// 	array(
+	// 		'attributes' => array(
+	// 			'data-group' => 'partner',
+	// 		),
+	// 		'classes'      => 'experimental-row-class',
+	// 		'label_cb'     => 'use_label_callback',
+	// 		'show_names'   => 0,
+	// 		'name'         => 'Partner',
+	// 		'desc'         => '',
+	// 		'default'      => '',
+	// 		'id'           => 'projectPartner',
+	// 		'type'         => 'partner',
+	// 		'object_types' => array( 'project' ),
+	// 		'after_row'    => '<hr>',
+	// 	)
+	// );
 	/**
 	 * Project Location is a cluster of fields that are defined as a single field type of 'address'.
-	 * The field is defined in the ../includes/project-location-field-type.php file.
+	 * The field is defined in the ../../includes/project-location-field-type.php file.
 	 *
 	 * @todo Get some formatting in there so it isn't so ugly - flexbox maybe? Plut the field names in the inputs with javascript?  Something to make the alignment not be so godawful.
 	 */
 	$projects->add_field(
 		array(
+			// 'show_names'   => false,
 			'name'         => 'Project Location',
-			'class' => 'nick-fieldtype',
-			'desc'         => 'Project Address',
-			'id'           => 'projectLocation',
+			// 'desc'         => 'Project Address',
+			'id'           => 'projectLocation', // Name of the custom field type we setup.
 			'type'         => 'address',
 			'object_types' => array( 'project' ), // Only show on project post types.
 			'options'      => array(),
-			'before_row'   => '<span class="dashicons dashicons-location-alt"></span>', // callback.
-			// 'before'       => '<p>Testing <b>"before"</b> parameter</p>',
-			// 'before_field' => '<p>Testing <b>"before_field"</b> parameter</p>',
-			// 'after_field'  => '<p>Testing <b>"after_field"</b> parameter</p>',
-			// 'after'        => '<p>Testing <b>"after"</b> parameter</p>',
-			'after_row'    => '<hr style="color: goldenrod;">',
+
 		)
 	);
 
+	$projects->add_field(
+		array(
+			'name'         => 'Quotation',
+			'show_names'   => true,
+			'type'         => 'quote',
+			'default'      => '',
+			'id'           => 'projectQuote',
+			'options'      => array(),
+			'object_types' => array( 'project' ), // Only show on project post types.
+		)
+	);
 
 	/**
 	 * Job Number: projectJobNumber: Small Text Field.
@@ -79,17 +176,17 @@ function register_projects_metabox() {
 	 */
 	$projects->add_field(
 		array(
-			'name'         => 'Job #',
+			'name'         => 'Job#',
 			'desc'         => 'Assigned Job Number',
 			'default'      => '',
 			'id'           => 'projectJobNumber',
 			'type'         => 'text_small',
 			'object_types' => array( 'project' ), // Only show on project post types.
 			// 'column'       => array(
-			// 	'position' => 2,
-			// 	'name'     => 'Job #',
+			// 'position' => 2,
+			// 'name'     => 'Job #',
 			// ),
-			'before_row'   => 'yourprefix_before_row_if_2', // callback.
+			'before_row'   => '', // callback.
 			'after_row'    => '<hr>',
 		)
 	);
@@ -100,7 +197,6 @@ function register_projects_metabox() {
 	 */
 	$projects->add_field(
 		array(
-			'before_row'   => '<span class="dashicons dashicons-yes-alt"></span>',
 			'name'         => 'Status',
 			'id'           => 'projectJobStatus',
 			'type'         => 'radio_inline',
@@ -120,7 +216,7 @@ function register_projects_metabox() {
 	 */
 	$projects->add_field(
 		array(
-			'name'         => 'Completed In',
+			'name'         => 'Completed',
 			'desc'         => '4 digit year representing when this project completed',
 			'default'      => '2019',
 			'id'           => 'projectCompletedYear', // was 'jobYear' - alter that in your database.
@@ -138,7 +234,7 @@ function register_projects_metabox() {
 	 */
 	$projects->add_field(
 		array(
-			'name'         => 'Completion Expected',
+			'name'         => 'Expected',
 			'desc'         => '4 digit year for when this upcoming project is expected to complete',
 			'default'      => '2019',
 			'id'           => 'projectExpectedCompletionYear', // was 'jobYear' - alter that in your database.
@@ -155,7 +251,7 @@ function register_projects_metabox() {
 	 */
 	$projects->add_field(
 		array(
-			'name'         => 'Year Started',
+			'name'         => 'Started',
 			'desc'         => '4 digit year of when we started working on this ongoing project',
 			'default'      => '2019',
 			'id'           => 'projectYearStarted',
@@ -173,6 +269,7 @@ function register_projects_metabox() {
 	 */
 	$projects->add_field(
 		array(
+			'class'        => 'input-full-width',
 			'name'         => 'Tease',
 			'desc'         => 'Brief Synopsis of the project. 140 characters or less.',
 			'default'      => '',
@@ -188,7 +285,8 @@ function register_projects_metabox() {
 	 */
 	$projects->add_field(
 		array(
-			'name'         => 'Alt. Name',
+			'class'        => 'input-full-width',
+			'name'         => 'Alt',
 			'desc'         => 'Is there an alternate name or client for this project?',
 			'default'      => '',
 			'id'           => 'projectAltName',
@@ -203,20 +301,20 @@ function register_projects_metabox() {
 	 */
 	$projects->add_field(
 		array(
-			'name'         => 'SVG Logo',
+			'name'         => 'SVG',
 			'desc'         => 'Upload a client SVG logo.',
 			'id'           => 'projectSVGLogo',
 			'type'         => 'file',
 			'object_types' => array( 'project' ), // Only show this field on project post types.
 			// Optional.
-			'options' => array(
+			'options'      => array(
 				'url' => false, // Hide the text input for the url.
 			),
-			'text'    => array(
+			'text'         => array(
 				'add_upload_file_text' => 'Add SVG', // Change upload button text. Default: "Add or Upload File".
 			),
 			// query_args are passed to wp.media's library query.
-			'query_args' => array (
+			'query_args'   => array(
 				'type' => 'image/svg+xml', // Make library only display SVG.
 			),
 			'preview_size' => 'medium', // Image size to use when previewing in the admin.
@@ -233,7 +331,7 @@ function register_projects_metabox() {
 			'id'           => 'projectNarrative',
 			'type'         => 'textarea_code',
 			'object_types' => array( 'project' ), // Only show on project post types.
-			'options'      => $states,
+			// 'options'      => $states,
 		)
 	);
 
@@ -244,14 +342,14 @@ function register_projects_metabox() {
 	 */
 	$projects->add_field(
 		array(
-			'name'         => 'Square Images',
+			'name'         => 'Square',
 			'desc'         => 'Add any images that have an equal height and width here.',
 			'id'           => 'projectImagesSquare',
 			'type'         => 'file_list',
 			'preview_size' => array( 100, 100 ),
 			'query_args'   => array( 'type' => 'image' ), // Only images attachmt.
 			// Optional, override default text strings.
-			'text'         => array (
+			'text'         => array(
 				'add_upload_files_text' => 'Add Images',
 				'remove_image_text'     => 'Remove',
 				'file_text'             => 'Files:',
@@ -266,8 +364,8 @@ function register_projects_metabox() {
 	 */
 	$projects->add_field(
 		array(
-			'name'         => 'Slideshow Images',
-			'desc'         => 'slideshow images',
+			'name'         => '4x3',
+			'desc'         => 'Typically 4x3',
 			'id'           => 'projectImagesSlideshow',
 			'type'         => 'file_list',
 			'preview_size' => array( 200, 150 ), // Default: 50, 50.
@@ -283,90 +381,6 @@ function register_projects_metabox() {
 		)
 	);
 
-
-
-	/**
-	 * Establish the types of project partners for the selection field options.
-	 *
-	 * @param boolean $value
-	 * @return string $partner_options  HTML containing the options fields for the field labeled partner type.
-	 */
-	function output_partner_type_options( $value = false ) {
-		// Establish an associative array of the partner types. This isn't by any means finished. I cannot think of any more partner types offhand, however.
-		$partnertypes    = array(
-			'architect' => 'Architect',
-			'gc'        => 'General Contractor',
-			'designer'  => 'SEGD Firm',
-		);
-		$partner_options = '';
-		// Keys will serve as the value attribute and the values will serve as the output.
-		foreach ( $partnertypes as $abbrev => $partnertype ) {
-			$output           = '<option value="';
-			$output          .= esc_attr( $abbrev );
-			$output          .= '" ';
-			$output          .= selected( $value, $abbrev, false );
-			$output          .= '>';
-			$output          .= esc_html( $partnertype );
-			$output          .= '</option>';
-			$partner_options .= $output;
-		}
-		return $partner_options;
-	}
-
-	$partners_group_field = $projects->add_field(
-		array(
-			'id'          => 'partnerInformation',
-			'type'        => 'group', // Several fields grouped together.
-			'description' => '',
-			'options'     => array(
-				'group_title'    => 'Project Partner {#}',
-				'add_button'     => 'Additional Partners',
-				'remove_button'  => 'Remove This Partner',
-				'sortable'       => true,
-				'closed'         => 'true',
-				'remove_confirm' => 'Are you sure you want to remove this partner?',
-			),
-		)
-	);
-	// Id's for group's fields only need to be unique for the group. Prefix is not needed.
-	$projects->add_group_field(
-		$partners_group_field,
-		array(
-			'name' => 'Partner Name',
-			'id'   => 'partnerName',
-			'type' => 'text',
-		)
-	);
-	$projects->add_group_field(
-		$partners_group_field,
-		array(
-			'name'    => 'Partner Type',
-			'id'      => 'partnerType',
-			'type'    => 'select',
-			'options' => output_partner_type_options( 'partner-types' ), // Callback function written 50 lines above. Populates select options.
-		)
-	);
-	$projects->add_group_field(
-		$partners_group_field,
-		array(
-			'name' => 'Partner Link',
-			'id'   => 'partnerLink',
-			'desc' => 'Link to partner page',
-			'type' => 'text_url',
-		)
-	);
-	$projects->add_group_field(
-		$partners_group_field,
-		array(
-			'name'         => 'Partner Logo',
-			'id'           => 'partnerLogo',
-			'desc'         => 'Partner Logo',
-			'type'         => 'file',
-			'text'         => [ 'add_upload_file_text' => 'Add SVG' ],
-			'query_args'   => [ 'type' => 'image/svg+xml' ],
-			'preview_size' => 'large',
-		)
-	);
 
 } // End def function register_projects_metabox().
 

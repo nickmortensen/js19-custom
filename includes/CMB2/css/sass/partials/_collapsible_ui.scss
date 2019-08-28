@@ -3,7 +3,7 @@
 		max-width: 1000px
 	}
 	.cmbhandle {
-		color: #aaa;
+		color: $gray;
 		float: right;
 		width: 27px;
 		height: 30px;
@@ -28,7 +28,8 @@
 	.postbox.closed {
 		.cmbhandle {
 			&:before {
-				content: '\f140';
+                content: '\f140';
+                color: $yellow;
 			}
 		}
 	}
@@ -45,10 +46,10 @@
 		opacity: .5;
 		&:not([disabled]) {
 			cursor: pointer;
-			color: $dark-red;
+			color: $fuchsia;
 			opacity: 1;
 			&:hover {
-				color: $red;
+				color: darken($fuchsia, 40%);
 			}
 		}
 	}

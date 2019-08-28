@@ -31,14 +31,9 @@ Context Metaboxes
 
 	margin-bottom: 10px;
 
-	&.context-before_permalink-box {
-		margin-top: 10px;
-	}
+	&.context-before_permalink-box { margin-top: 10px; }
 
-	&.context-after_title-box {
-		margin-top: 10px;
-	}
-
+	&.context-after_title-box { margin-top: 10px; }
 	&.context-after_editor-box {
 		margin-top: 20px;
 		margin-bottom: 0;
@@ -56,9 +51,7 @@ Context Metaboxes
 		}
 	}
 
-	.hndle {
-		cursor: auto;
-	}
+	.hndle { cursor: auto; }
 }
 
 .cmb2-context-wrap {
@@ -79,7 +72,8 @@ Context Metaboxes
 
 	.cmb-th {
 		padding: 0 2% 0 0;
-		width: 18%;
+        width: 18%;
+        border: 5px solid red;
 	}
 
 	.cmb-td {
@@ -89,7 +83,7 @@ Context Metaboxes
 
 	.cmb-row {
 		margin-bottom: 10px;
-		border-bottom: 2px solid #515153;
+		border-bottom: 12px solid #515153;
 
 		&:last-of-type {
 			margin-bottom: 0;
@@ -101,8 +95,6 @@ Context Metaboxes
 /* one column on the post write/edit screen */
 @media only screen and (max-width: 850px) {
 
-	.cmb2-context-wrap.cmb2-context-wrap-form_top {
-		margin-right: 0;
-	}
+	.cmb2-context-wrap.cmb2-context-wrap-form_top { margin-right: 0; }
 
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Register a custom post type called "Staffer".
+ * Register a custom post type called "Staff".
  *
  * @category   Plugins
  * @package    js19 custom
@@ -10,7 +10,7 @@
  * @link       http://github.com/nickmortensen/js19-custom/
  * @since      5.0.2
  */
-function js19_staff_cpt_init() {
+function js19_staff_custom_post_type_initialize() {
 	$labels = array(
 		'name'                  => _x( 'Staffers', 'Post type general name', 'js19-custom' ),
 		'singular_name'         => _x( 'Staffmember', 'Post type singular name', 'js19-custom' ),
@@ -61,3 +61,7 @@ function js19_staff_cpt_init() {
 
 	register_post_type( 'staff', $args );
 }
+/**
+ * Including the function to initialize custom post types within the JS19__ROOT . js19-custom.php file instead of here, but leave the function commented out in case I want to refactor.
+ */
+// add_action( 'init', 'js19_staff_custom_post_type_initialize', 0 );

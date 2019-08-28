@@ -28,7 +28,7 @@ jQuery(document).ready(($) => {
     // Event listener for any change in the form values - including adding new elements.
     changeContext.addEventListener
   };
-  */
+*/
   /**
    * Set up the functionality for CMB2 conditionals.
    */
@@ -296,7 +296,7 @@ jQuery(document).ready(($) => {
 
   /**
    * refactor without jQuery.
-  */
+
   const post = document.getElementById('post');
   const cmb2Wrap = post.querySelector('.cmb2-wrap');
   const wpWrap = document.getElementById('wpwrap');
@@ -313,7 +313,7 @@ jQuery(document).ready(($) => {
     default:
       break;
   }
-
+*/
 
   // switch (true) {
   //   // init for classic editor

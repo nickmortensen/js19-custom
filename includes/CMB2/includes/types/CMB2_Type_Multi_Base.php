@@ -19,12 +19,12 @@ abstract class CMB2_Type_Multi_Base extends CMB2_Type_Base {
 	 * @param  array $args Arguments array containing value, label, and checked boolean
 	 * @return string       Generated option element html
 	 */
-  public function select_option( $args = array() ) {
-    return sprintf( "\t" . '<option value="%s" %s>%s</option>', $args['value'], selected( isset( $args['checked'] ) && $args['checked'], true, false ), $args['label'] ) . "\n";
-  }
+	public function select_option( $args = array() ) {
+		return sprintf( "\t" . '<option value="%s" %s>%s</option>', $args['value'], selected( isset( $args['checked'] ) && $args['checked'], true, false ), $args['label'] ) . "\n";
+	}
 
 	/**
-	 * Generates html for list item with input
+	 * Generates html for list item with input.
 	 *
 	 * @since  1.1.0
 	 * @param  array $args Override arguments
@@ -32,24 +32,25 @@ abstract class CMB2_Type_Multi_Base extends CMB2_Type_Base {
 	 * @return string       Gnerated list item html
 	 */
 	public function list_input( $args = array(), $i ) {
-		$a = $this->parse_args( 'list_input', array(
-			'type'  => 'radio',
-			'class' => 'cmb2-option',
-			'name'  => $this->_name(),
-			'id'    => $this->_id( $i ),
-			'value' => $this->field->escaped_value(),
-			'label' => '',
-		), $args );
-    $tab        = "\t";
-    $newline    = "\n";
-    $id         = $a['id'];
-    $label      = $a['label'];
-    $attributes = $this->concat_attrs( $a, array( 'label' ) );
+		$a = $this->parse_args(
+			'list_input',
+			array(
+				'type'  => 'radio',
+				'class' => 'cmb2-option',
+				'name'  => $this->_name(),
+				'id'    => $this->_id( $i ),
+				'value' => $this->field->escaped_value(),
+				'label' => '',
+			),
+			$args
+		);
+		$tab        = "\t";
+		$newline    = "\n";
+		$id         = $a['id'];
+		$label      = $a['label'];
+		$attributes = $this->concat_attrs( $a, array( 'label' ) );
 
-
-return sprintf( $tab . '<li><input %s/><label for="%s">%s</label></li>' . $newline, $attributes, $id, $label);
-
-		// return sprintf( "\t" . '<li><input%s/> <label for="%s">%s</label></li>' . "\n", $this->concat_attrs( $a, array( 'label' ) ), $a['id'], $a['label'] );
+		return sprintf( $tab . '<li><input %s/><label for="%s">%s</label></li>' . $newline, $attributes, $id, $label );
 	}
 
 	/**
@@ -62,7 +63,7 @@ return sprintf( $tab . '<li><input %s/><label for="%s">%s</label></li>' . $newli
 	 */
 	public function list_input_checkbox( $args, $i ) {
 		$saved_value = $this->field->escaped_value();
-		if ( is_array( $saved_value ) && in_array( $args['value'], $saved_value ) ) {
+		if ( is_array( $saved_value ) && in_array( $args['value'], $saved_value, true ) ) {
 			$args['checked'] = 'checked';
 		}
 		$args['type'] = 'checkbox';
@@ -80,28 +81,28 @@ return sprintf( $tab . '<li><input %s/><label for="%s">%s</label></li>' . $newli
 		$field = $this->field;
 
 		// $method = isset( $args['method'] ) ? $args['method'] : 'select_option';
-    $method = $args['method'] ?? 'select_option';
-		unset( $args['method'] );
+		$method = $args['method'] ?? 'select_option';
+			unset( $args['method'] );
 
 		// $value = null !== $field->escaped_value() ? $field->escaped_value() : $field->get_default();
-    $value = $field->escaped_value() ?? $field->get_default();
+		$value = $field->escaped_value() ?? $field->get_default();
 
 		if ( is_numeric( $value ) ) {
 			$value = intval( $value );
 		}
 
 		$concatenated_items = '';
-		$i = 1;
+		$i                  = 1;
 
 		$options = array();
 		if ( $option_none = $field->args( 'show_option_none' ) ) {
 			$options[''] = $option_none;
 		}
-    /**
-     * PHP MANUAL
-     *
-     * The + operator returns the right-hand array appended to the left-hand array; for keys that exist in both arrays, the elements from the left-hand array will be used, and the matching elements from the right-hand array will be ignored.
-    */
+		/**
+		 * PHP MANUAL
+		 *
+		 * The + operator returns the right-hand array appended to the left-hand array; for keys that exist in both arrays, the elements from the left-hand array will be used, and the matching elements from the right-hand array will be ignored.
+		*/
 		$options = $options + (array) $field->options();
 		foreach ( $options as $opt_value => $opt_label ) {
 

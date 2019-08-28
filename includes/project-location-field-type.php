@@ -75,7 +75,6 @@ function render_address_field_callback( $field, $value, $object_id, $object_type
 		$value,
 		array(
 			'address-1' => '',
-			// 'address-2' => '',
 			'city'      => '',
 			'state'     => '',
 			'zip'       => '',
@@ -100,27 +99,11 @@ function render_address_field_callback( $field, $value, $object_id, $object_type
 		?>
 	</div><!-- end div#address-1 -->
 
-	<!-- <div> -->
-		<!-- <label for="<?php echo $field_type->_id( '_address_2' ); ?>'">Address 2</label> -->
-		<?php
-		// echo $field_type->input(
-		// 	array(
-		// 		'name'  => $field_type->_name( '[address-2]' ),
-		// 		'id'    => $field_type->_id( '_address_2' ),
-		// 		'value' => $value['address-2'],
-		// 		'desc'  => '',
-		// 	)
-		// );
-		?>
-	<!-- </div> -->
-	<!-- end div#address-2 -->
-
-	<div class="alignleft">
+	<div>
 	<label for="<?php echo $field_type->_id( '_city' ); ?>'">City</label>
 	<?php
 	echo $field_type->input(
 		array(
-			'class' => 'cmb_text_small',
 			'name'  => $field_type->_name( '[city]' ),
 			'id'    => $field_type->_id( '_city' ),
 			'value' => $value['city'],
@@ -129,7 +112,7 @@ function render_address_field_callback( $field, $value, $object_id, $object_type
 	);
 	?>
 	</div><!-- end div#city -->
-	<div class="alignleft">
+	<div>
 		<label for="<?php echo $field_type->_id( '_state' ); ?>'">State</label>
 		<?php
 		echo $field_type->select(
@@ -148,7 +131,6 @@ function render_address_field_callback( $field, $value, $object_id, $object_type
 		<?php
 		echo $field_type->input(
 			array(
-				'class' => 'cmb_text_small',
 				'name'  => $field_type->_name( '[zip]' ),
 				'id'    => $field_type->_id( '_zip' ),
 				'value' => $value['zip'],
@@ -158,13 +140,12 @@ function render_address_field_callback( $field, $value, $object_id, $object_type
 		);
 		?>
 	</div><!-- end div#zip -->
-<br>
-	<div class="alignleft">
+
+	<div>
 		<label for="<?php echo $field_type->_id( '_latitude' ); ?>'">Latitude</label>
 		<?php
 		echo $field_type->input(
 			array(
-				'class' => 'cmb_text_small',
 				'name'  => $field_type->_name( '[latitude]' ),
 				'id'    => $field_type->_id( '_latitude' ),
 				'value' => $value['latitude'],
@@ -173,11 +154,10 @@ function render_address_field_callback( $field, $value, $object_id, $object_type
 		);
 		?>
 	</div><!-- end div#latitude -->
-	<div class="alignleft">
+	<div>
 		<label for="<?php echo $field_type->_id( '_longitude' ); ?>'">Longitude</label>
 		<?php echo $field_type->input(
 			array(
-				'class' => 'cmb_text_small',
 				'name'  => $field_type->_name( '[longitude]' ),
 				'id'    => $field_type->_id( '_longitude' ),
 				'value' => $value['longitude'],
@@ -186,7 +166,7 @@ function render_address_field_callback( $field, $value, $object_id, $object_type
 		?>
 	</div><!-- end div#longitude -->
 
-	<br class="clear">
+
 <?php
 	// echo 'using project-location-field-type.php';
 

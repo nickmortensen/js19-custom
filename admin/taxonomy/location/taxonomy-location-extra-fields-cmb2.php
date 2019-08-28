@@ -100,6 +100,11 @@ jones_display_location_in_footer, locationWithinFooter
 */
 add_action( 'cmb2_init', 'register_location_taxonomy_metabox' );
 
+function add_these_classes( $field_args, $field ) {
+	$classes = array( 'dont-show-description' );
+	return $classes;
+}
+
 /**
  * Hook in and add a metabox to add fields to 'location' taxonomy terms
  */
@@ -122,27 +127,22 @@ function register_location_taxonomy_metabox() {
 	);
 	$location->add_field(
 		array(
-			'name' => __( 'Website URL', 'cmb2' ),
-			'id'   => 'locationURL',
-			'type' => 'text_url',
-			'show_names' => true,
-			'attributes' => (
+			'name'        => __( 'Website URL', 'cmb2' ),
+			'description' => 'nimble website url',
+			'id'          => 'locationURL',
+			'type'        => 'text_url',
+			'show_names'  => true,
+			'classes_cb'  => 'add_these_classes',
+			'protocols'   => ['http', 'https'],
+			'attributes'  => (
 				array(
-					'placeholder' => 'http://jonessign.com'
+					'placeholder' => 'http://jonessign.com',
+					'data-fucking' => 'ConditionalFucking',
 				)
 			),
 		)
 	);
-	/* SHOW THIS FIELD IN FOOTER? */
-	$location->add_field(
-		array(
-			'name'       => 'Footer',
-			'desc'       => 'Show this location within the site footer',
-			'id'         => 'locationWithinFooter',
-			'type'       => 'checkbox',
-			'show_names' => false,
-		)
-	);
+
 	/* CAPABILITIES OF THE LOCATION */
 	$location->add_field(
 		array(
@@ -150,13 +150,13 @@ function register_location_taxonomy_metabox() {
 			'desc'              => 'check all that apply',
 			'id'                => 'locationCapabilities',
 			'type'              => 'multicheck',
-			'inline'            => false,
+			'inline'            => true,
 			'select_all_button' => false,
 			'options'           => array(
-				'fab'     => 'Fabrication',
-				'install' => 'Install',
-				'pm'      => 'Project Manage',
-				'sales'   => 'Sales',
+				'Fabrication'        => 'Fab',
+				'Installation'       => 'Install',
+				'Project Management' => 'PM',
+				'Sales'              => 'Sales',
 			),
 
 		)
@@ -333,6 +333,15 @@ function register_location_taxonomy_metabox() {
 				'type'    => 'text_medium',
 			)
 		);
-
+		/* SHOW THIS FIELD IN FOOTER? */
+		$location->add_field(
+			array(
+				'name'       => 'Footer',
+				'desc'       => 'Show this location within the site footer',
+				'id'         => 'locationWithinFooter',
+				'type'       => 'checkbox',
+				'show_names' => false,
+			)
+		);
 
 } // End def function register_projects_metabox().
