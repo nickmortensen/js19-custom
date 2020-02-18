@@ -1,5 +1,5 @@
 /*--------------------------------------------------------------
-Sidebar Placement Adjustments
+ * Sidebar Placement Adjustments
 --------------------------------------------------------------*/
 
 .inner-sidebar,
@@ -7,17 +7,17 @@ Sidebar Placement Adjustments
 
 	.cmb2-wrap {
 
-		>.cmb-field-list>.cmb-row {
+		> .cmb-field-list > .cmb-row {
 			padding: 1.4em 0;
 		}
 
 		input {
 
-			&[type=text]:not(.wp-color-picker) {
+			&[type=text]:not( .wp-color-picker ) {
 				width: 100%;
 			}
 
-			+input:not(.wp-picker-clear), +select {
+			+ input:not( .wp-picker-clear ), + select {
 				margin-left: 0;
 				margin-top: 1em;
 				display: block;
@@ -25,7 +25,7 @@ Sidebar Placement Adjustments
 
 			&.cmb2-text-money {
 				max-width: 70%;
-				+.cmb2-metabox-description {
+				+ .cmb2-metabox-description {
 					display: block;
 				}
 			}
@@ -39,26 +39,30 @@ Sidebar Placement Adjustments
 
 	}
 
-	textarea { max-width: 99%; }
+	textarea {
+		max-width: 99%;
+	}
 
-	.cmb-repeatable-group { border-bottom: 1px solid $light-gray; }
+	.cmb-repeatable-group {
+		border-bottom: 1px solid $light-gray;
+	}
 
-	.cmb-type-group>.cmb-td>.cmb-repeatable-group {
+	.cmb-type-group > .cmb-td > .cmb-repeatable-group {
 		border-bottom: 0;
 		margin-bottom: -1.4em;
 	}
 
 	.cmb-th,
-	.cmb-td,
-	.cmb-th+.cmb-td {
+	.cmb-td:not(.cmb-remove-row),
+	.cmb-th + .cmb-td {
 		width: 100%;
-		// display: block;
+		display: block;
 		float: none;
 	}
 
-	.closed .inside { display: none; }
-
-	.cmb-td .cmb-td { padding-bottom: .5em; }
+	.closed .inside {
+		display: none;
+	}
 
 	.cmb-th {
 		@include fullth_side;
@@ -83,7 +87,7 @@ Sidebar Placement Adjustments
 	}
 
 	.cmb-repeatable-grouping {
-		+.cmb-repeatable-grouping {
+		+ .cmb-repeatable-grouping {
 			margin-top: 1em;
 		}
 	}
@@ -132,19 +136,6 @@ Sidebar Placement Adjustments
 		clear: both;
 		padding-top: 12px;
 		padding-bottom: 0;
-	}
-
-	.cmb-type-colorpicker .cmb-repeat-row {
-		.cmb-td {
-			width: auto;
-			clear: none;
-			float: left;
-			padding-top: 0;
-			&.cmb-remove-row {
-				float: right;
-				margin: 0;
-			}
-		}
 	}
 
 	.cmb2-upload-button {

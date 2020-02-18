@@ -35,6 +35,21 @@ function use_label_callback( $field_args ) {
 	echo '<h3>' . esc_html( $label ) . '</h3>';
 }
 
+/** SANITIZATION CALLBACK FOR THE JOB FOLDER FIELD
+ *
+ *  I WANT TO WRITE A CALLBACK FUNCTION THAT REPLACES ALL SPACES WITH AN ESCAPED SPACE
+*/
+
+/**
+ * Handles escaping for the projectLocalFolder field for display.
+ *
+ * @param  mixed      $value      The unescaped value from the database.
+ * @param  array      $field_args Array of field arguments.
+ * @param  CMB2_Field $field      The field object
+ *
+ * @return mixed                  Escaped value to be displayed.
+ */
+
 
 
 
@@ -60,6 +75,37 @@ function register_projects_metabox() {
 			'get_box_permissions_check_cb' => 'projects_limit_rest_view_to_logged_in_users',
 		)
 	);
+
+$args = array(
+	'type' => 'switch',
+	'desc' => 'testing the original',
+	'id'   => 'projectSwitchTest',
+	'name' => 'switch test',
+	'value' => 'on'
+);
+$projects->add_field( $args );
+
+
+$betterswitch_args = array(
+	'type' => 'betterswitch',
+	'desc' => 'testing',
+	'id'   => 'projectBetterswitchTest',
+	'name' => 'betterswitch test',
+	'value' => 'on',
+	'options' => array (
+		'height' => 'six five'
+	)
+);
+$projects->add_field( $betterswitch_args );
+
+
+	$job_folder_args = array(
+			'name' => 'Local Folder',
+			'id'   => 'projectLocalFolder',
+			'type' => 'text',
+			'desc' => 'Where is the archive on the Jones Sign Internal Servers?',
+	);
+	$projects->add_field( $job_folder_args );
 
 	// $partners_field_identifier = $projects->add_field(
 	// 	array(

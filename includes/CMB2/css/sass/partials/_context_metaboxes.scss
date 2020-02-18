@@ -1,5 +1,5 @@
 /*--------------------------------------------------------------
-Context Metaboxes
+ * Context Metaboxes
 --------------------------------------------------------------*/
 
 /* Metabox collapse arrow indicators */
@@ -9,7 +9,7 @@ Context Metaboxes
 		&:before {
 			content: "\f142";
 			display: inline-block;
-			font: normal 20px/1 $icons;
+			font: normal 20px/1 dashicons;
 			speak: none;
 			-webkit-font-smoothing: antialiased;
 			-moz-osx-font-smoothing: grayscale;
@@ -31,9 +31,14 @@ Context Metaboxes
 
 	margin-bottom: 10px;
 
-	&.context-before_permalink-box { margin-top: 10px; }
+	&.context-before_permalink-box {
+		margin-top: 10px;
+	}
 
-	&.context-after_title-box { margin-top: 10px; }
+	&.context-after_title-box {
+		margin-top: 10px;
+	}
+
 	&.context-after_editor-box {
 		margin-top: 20px;
 		margin-bottom: 0;
@@ -51,7 +56,9 @@ Context Metaboxes
 		}
 	}
 
-	.hndle { cursor: auto; }
+	.hndle {
+		cursor: auto;
+	}
 }
 
 .cmb2-context-wrap {
@@ -72,8 +79,7 @@ Context Metaboxes
 
 	.cmb-th {
 		padding: 0 2% 0 0;
-        width: 18%;
-        border: 5px solid red;
+		width: 18%;
 	}
 
 	.cmb-td {
@@ -83,7 +89,6 @@ Context Metaboxes
 
 	.cmb-row {
 		margin-bottom: 10px;
-		border-bottom: 12px solid #515153;
 
 		&:last-of-type {
 			margin-bottom: 0;
@@ -95,6 +100,8 @@ Context Metaboxes
 /* one column on the post write/edit screen */
 @media only screen and (max-width: 850px) {
 
-	.cmb2-context-wrap.cmb2-context-wrap-form_top { margin-right: 0; }
+	.cmb2-context-wrap.cmb2-context-wrap-form_top {
+		margin-right: 0;
+	}
 
 }

@@ -1,9 +1,10 @@
-/**
- * CMB2 Styling
- */
+/*--------------------------------------------------------------
+ * CMB2 Display Styling
+--------------------------------------------------------------*/
 
 .cmb2-colorpicker-swatch {
 	span {
+		display: inline-block;
 		width: 1em;
 		height: 1em;
 		border-radius: 1em;
@@ -13,7 +14,9 @@
 	}
 }
 
-.cmb2-code { overflow: scroll; }
+.cmb2-code {
+	overflow: scroll;
+}
 
 .cmb-image-display {
 	max-width: 100%;

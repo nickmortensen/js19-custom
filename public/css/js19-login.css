@@ -1,12 +1,29 @@
-body.login {
-    background: orange;
-}
+body.login { background: radial-gradient(circle at 91.88%, at 32.85%, #7e75ff, transparent 67%), radial-gradient(circle at 59.68%, at 33.45%, #73ffab, transparent 61%), radial-gradient(circle at 22.55%, at 23.74%, #ffff4a, transparent 58%), radial-gradient(circle at 3.99%, at 90.04%, #ff94fb, transparent 67%), radial-gradient(circle at 92.97%, at 92%, #ff722b, transparent 61%), radial-gradient(circle at 50%, at 50%, #fff, #fff 100%); background: radial-gradient(circle at 91.88% 32.85%, #7e75ff, transparent 67%), radial-gradient(circle at 59.68% 33.45%, #73ffab, transparent 61%), radial-gradient(circle at 22.55% 23.74%, #ffff4a, transparent 58%), radial-gradient(circle at 3.99% 90.04%, #ff94fb, transparent 67%), radial-gradient(circle at 92.97% 92%, #ff722b, transparent 61%), radial-gradient(circle at 50% 50%, #fff, #fff 100%); }
 
 
 body.login div#login form#loginform {
-    border-radius: 10px;
+	border-radius          : 10px;
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter        : blur(10px);
+	background-color       : rgba(255, 255, 255, 0.2);
 }
 
 body.login .custom-message {
-    font-size: 3rem;
+    font-size: 1.4rem;
+}
+#login>h1>a {
+	display: none;
+}
+#login {
+	width: 40vw;
+}
+#login p.message {
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter        : blur(10px);
+	background-color       : rgba(255, 255, 255, 0.5);
+}
+.input > div {
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter        : blur(10px);
+	background-color       : rgba(255, 255, 255, 0.5);
 }

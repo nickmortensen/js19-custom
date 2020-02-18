@@ -1,7 +1,8 @@
+/*--------------------------------------------------------------
+ * Collapsible UI
+--------------------------------------------------------------*/
+
 .cmb2-metabox {
-	.cmb-type-group {
-		max-width: 1000px
-	}
 	.cmbhandle {
 		color: $gray;
 		float: right;
@@ -13,7 +14,7 @@
 		&:before {
 			content: '\f142';
 			right: 12px;
-			font: normal 20px/1 $icons;
+			font: normal 20px/1 'dashicons';
 			speak: none;
 			display: inline-block;
 			padding: 8px 10px;
@@ -28,8 +29,7 @@
 	.postbox.closed {
 		.cmbhandle {
 			&:before {
-                content: '\f140';
-                color: $yellow;
+				content: '\f140';
 			}
 		}
 	}
@@ -46,10 +46,10 @@
 		opacity: .5;
 		&:not([disabled]) {
 			cursor: pointer;
-			color: $fuchsia;
+			color: $dark-red;
 			opacity: 1;
 			&:hover {
-				color: darken($fuchsia, 40%);
+				color: $red;
 			}
 		}
 	}

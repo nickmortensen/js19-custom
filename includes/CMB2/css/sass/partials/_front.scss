@@ -1,4 +1,10 @@
-.closed .inside { display: none; }
+/*--------------------------------------------------------------
+ * CMB2 Frontend
+--------------------------------------------------------------*/
+
+.closed .inside {
+	display: none;
+}
 
 .cmb-repeatable-grouping {
 	position: relative;
@@ -10,7 +16,7 @@
 	}
 
 	h3 {
-		font-size: 1.2rem;
+		font-size: 14px;
 		padding: 8px 12px;
 		margin: 0;
 		line-height: 1.4;
@@ -20,9 +26,13 @@
 
 .cmb-repeatable-group {
 
-	&.repeatable .cmb-group-title { padding-left: 2.2em; }
+	&.repeatable .cmb-group-title {
+		padding-left: 2.2em;
+	}
 
-	&.non-repeatable .cmb-group-title { padding-left: 12px; }
+	&.non-repeatable .cmb-group-title {
+		padding-left: 12px;
+	}
 
 }
 
@@ -43,4 +53,8 @@
 	width: 20px;
 	height: 20px;
 	margin: 4px 10px 0;
+}
+
+.cmb2-char-max-msg {
+	display: none;
 }

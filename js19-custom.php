@@ -5,7 +5,7 @@
  * Description: Experimental Jones Sign Company specific plugin.
  * Version:     0.0.2
  * Author URI:  https://nickmortensen.com
- * Text Domain: js19-custom
+ * Text Domain: js2020
  * Domain Path: /languages
  *
  * @author Nick Mortensen
@@ -118,10 +118,11 @@ require_once JS19__CUSTOM_CMB2_FIELDS . '/billboard-field/billboard-metafield.ph
 
 // SWITCH FIELD
 // Add Switch field.
+require_once JS19__CUSTOM_CMB2_FIELDS . '/switch-button/switch-metafield-option-two.php';
 require_once JS19__CUSTOM_CMB2_FIELDS . '/switch-button/switch-metafield.php';
 
 // COORDINATES FIELD
-require_once JS19__CUSTOM_CMB2_FIELDS . '/coordinates-field/coordinates-metafield.php';
+// require_once JS19__CUSTOM_CMB2_FIELDS . '/coordinates-field/coordinates-metafield.php';
 /**
  * Load up the custom js and css for the Custom Switch Field in CMB2.
  *

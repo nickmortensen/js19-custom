@@ -22,13 +22,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-// staffIsCurrent.
-
-// staffPhoneMobile
-// staffPhoneDesk
-// staffPhoneExt
-// staffDOH
-// staffBirthday
 add_action( 'cmb2_admin_init', 'register_staff_posttype_metabox' );
 
 /**
